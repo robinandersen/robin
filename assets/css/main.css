@@ -1,0 +1,262 @@
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, nav, section, summary {
+  display: block; }
+
+html {
+  background: #0f0f0f;
+  color: #ffffff; }
+
+header {
+  width: 80%;
+  margin: 0 50%;
+  position: absolute;
+  z-index: 1000;
+  right: -40%;
+  top: 100px; }
+  header h1 {
+    font-family: brandon-grotesque;
+    font-font-weight: 900;
+    font-size: 48px;
+    float: left;
+    letter-spacing: 2px; }
+
+nav {
+  float: right;
+  margin-top: 21px; }
+  nav ul {
+    font-family: brandon-grotesque;
+    font-size: 28px;
+    font-weight: 400;
+    list-type: none;
+    letter-spacing: 1px; }
+    nav ul li {
+      display: inline; }
+    nav ul li:first-child {
+      margin-right: 60px; }
+    nav ul li:last-child {
+      margin-left: 60px; }
+    nav ul a:link, nav ul a:visited, nav ul a:hover, nav ul a:active {
+      color: #fff;
+      opacity: 0.5;
+      text-decoration: none; }
+    nav ul a.active {
+      color: #fff !important;
+      opacity: 1; }
+
+main {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  top: 0;
+  position: absolute; }
+
+table {
+  width: 80%;
+  font-family: brandon-grotesque;
+  margin: 315px auto 0 auto;
+  text-align: left;
+  clear: both; }
+  table tr {
+    line-height: 90px; }
+    table tr a:link, table tr a:visited, table tr a:hover, table tr a:active {
+      color: #ffffff;
+      text-decoration: none; }
+    table tr th {
+      text-align: left;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 12px;
+      line-height: 20px;
+      opacity: 0.3; }
+    table tr td {
+      font-size: 22px; }
+    table tr .td-description {
+      font-size: 18px; }
+
+.margin-row {
+  text-align: right; }
+
+.row-year {
+  text-align: right;
+  padding-right: 20px; }
+
+article section {
+  text-align: center;
+  width: 100%;
+  height: 1024px;
+  overflow: hidden; }
+  article section h1 {
+    color: #ffffff;
+    font-family: brandon-grotesque;
+    font-weight: 700;
+    font-size: 100px;
+    margin: 200px auto 0 auto;
+    clear: both; }
+  article section p {
+    color: #ffffff;
+    font-family: brandon-grotesque;
+    font-weight: 400;
+    font-size: 30px;
+    width: 690px;
+    margin: 0 auto;
+    line-height: 40px; }
+
+footer {
+  position: fixed;
+  width: auto;
+  z-index: 3000;
+  height: 30px;
+  bottom: 20px;
+  right: 20px; }
+  footer ul {
+    list-type: none; }
+    footer ul li {
+      display: inline;
+      font-family: brandon-grotesque;
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff; }
+    footer ul li:first-child {
+      margin: 0 12px 0 0; }
+    footer ul li:last-child {
+      margin: 0 0 0 12px; }
+    footer ul a:link, footer ul a:visited, footer ul a:active {
+      color: #ffffff;
+      text-decoration: none;
+      display: inline-block;
+      border-bottom: solid 2px #ffffff;
+      height: 25px;
+      transition-property: height;
+      transition-duration: 0.2s;
+      transition-timing-function: easy-ease; }
+    footer ul a:hover {
+      height: 22px; }
+
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@-moz-keyframes fadein {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@-ms-keyframes fadein {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@keyframes fadein {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@-webkit-keyframes fadeout {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+@-moz-keyframes fadeout {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+@-ms-keyframes fadeout {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+@keyframes fadeout {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+@-webkit-keyframes fadeinup {
+  0% {
+    opacity: 0;
+    transform: translate(0, 150px); }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); } }
+@-moz-keyframes fadeinup {
+  0% {
+    opacity: 0;
+    transform: translate(0, 150px); }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); } }
+@-ms-keyframes fadeinup {
+  0% {
+    opacity: 0;
+    transform: translate(0, 150px); }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); } }
+@keyframes fadeinup {
+  0% {
+    opacity: 0;
+    transform: translate(0, 150px); }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); } }
+.fadein {
+  -webkit-animation-name: fadein;
+  -moz-animation-name: fadein;
+  -ms-animation-name: fadein;
+  animation-name: fadein;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out;
+  -moz-animation-timing-function: ease-in-out;
+  -ms-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out; }
+
+.fadeinup {
+  -webkit-animation-name: fadeinup;
+  -moz-animation-name: fadeinup;
+  -ms-animation-name: fadeinup;
+  animation-name: fadeinup;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-out;
+  -moz-animation-timing-function: ease-out;
+  -ms-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+  -webkit-animation-delay: 0.3s;
+  -moz-animation-delay: 0.3s;
+  -ms-animation-delay: 0.3s;
+  animation-delay: 0.3s; }
+
+.is-exiting {
+  -webkit-animation-name: fadeout;
+  -moz-animation-name: fadeout;
+  -ms-animation-name: fadeout;
+  animation-name: fadeout;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-out;
+  -moz-animation-timing-function: ease-out;
+  -ms-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+  -webkit-animation-delay: 0.3s;
+  -moz-animation-delay: 0.3s;
+  -ms-animation-delay: 0.3s;
+  animation-delay: 0.3s; }
+
+/*# sourceMappingURL=main.css.map */
