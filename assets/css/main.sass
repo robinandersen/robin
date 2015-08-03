@@ -30,186 +30,22 @@ footer, header, hgroup, main, nav, section, summary
 html 
   background: $dark
   color: #ffffff
-
-header 
-  width: 80%
-  margin: 0 50%
-  position: absolute
-  z-index: 1000
-  right: -40%
-  top: 100px
-
-  
-  h1
-    font-family: $brandon
-    font-font-weight: $black
-    font-size: 48px
-    float: left
-    letter-spacing: 2px
-
-nav
-  float: right
-  margin-top: 21px
-
-  
-  ul
-    font-family: $brandon
-    font-size: 28px
-    font-weight: $regular
-    list-type: none
-    letter-spacing: 1px
-    
-    li
-      display: inline
-      
-    li:first-child
-      margin-right: 60px
-
-    li:last-child
-      margin-left: 60px
-
-    a:link,  a:visited, a:hover, a:active  
-      color: #fff
-      opacity: 0.5
-      text-decoration: none
-
-    a.active
-      color: #fff !important
-      opacity: 1
-
-// Home _____________________________________________
-
-main
-  width: 100%
-  height: 100%
-  margin: 0 auto
   text-align: center
-  top: 0
+
+
+section
+  margin: -15px 0 0 -150px
   position: absolute
-
-
-table
-  width: 80%
-  font-family: $brandon
-  margin: 315px auto 0 auto
-  text-align: left
-  clear: both
-  tr
-    line-height: 90px
-
-    a:link,  a:visited, a:hover,  a:active  
-      color: #ffffff
-      text-decoration: none
-    th
-      text-align: left
-      font-weight: $bold
-      text-transform: uppercase
-      font-size: 12px
-      line-height: 20px 
-      opacity: 0.3
-    td
-      font-size: 22px
-    .td-description
-      font-size: 18px
-
-
-.margin-row
-  text-align: right
-
-.row-year
-  text-align: right
-  padding-right: 20px
-
-
-// Project _____________________________________________
-
-article
-  section
-    text-align: center
-    width: 100%
-    height: 1024px
-    overflow: hidden
-    h1
-      color: $white
-      font-family: $brandon
-      font-weight: $bold
-      font-size: 100px
-      margin: 200px auto 0 auto
-      clear: both
-
-    p
-      color: $white
-      font-family: $brandon
-      font-weight: $regular
-      font-size: 30px
-      width: 690px
-      margin: 0 auto
-      line-height: 40px
-
-
-
-// Footer _____________________________________________
-
-footer
-  position: fixed
-  width: auto
-  z-index: 3000
   height: 30px
-  bottom: 20px
-  right: 20px
+  width: 300px
+  top: 50%
+  left: 50%
 
-  ul
-    list-type: none
-    
-    li
-      display: inline
-      font-family: $brandon
-      font-weight: $bold
-      font-size: 15px
-      color: #fff
-    
-    li:first-child
-      margin: 0 12px 0 0
-    
-    li:last-child
-      margin: 0 0 0 12px
-
-    a:link,  a:visited, a:active  
-      color: $white 
-      text-decoration: none
-      display: inline-block
-      border-bottom: solid 2px #ffffff
-      height: 25px
-
-      transition-property: height
-      transition-duration: 0.2s
-      transition-timing-function: easy-ease
-
-    a:hover
-      height: 22px
-
-// Page Transitions _____________________________________________
-
-
-@import mixins
-@import animations
-
-.fadein
-  +animation-name(fadein)
-  +animation-duration(0.5s)
-  +animation-timing-function(ease-in-out)
-
-.fadeinup
-  +animation-name(fadeinup)
-  +animation-duration(0.5s)
-  +animation-timing-function(ease-out)
-  +animation-delay(0.3s)
-
-.is-exiting
-  +animation-name(fadeout)
-  +animation-duration(0.5s)
-  +animation-timing-function(ease-out)
-  +animation-delay(0.3s)
+  p
+    font-family: $brandon
+    font-font-weight: $bold
+    font-size: 22px
+    letter-spacing: 10px
 
 
 

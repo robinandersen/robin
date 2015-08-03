@@ -23,9 +23,7 @@
 </head>
 <body>
 	<header>
-	  <h1>robin</h1>
 
-	<?php snippet('menu') ?>
 
 	</header>
 
