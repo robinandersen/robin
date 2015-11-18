@@ -43,9 +43,9 @@ header
   h1
     font-family: $brandon
     font-font-weight: $black
-    font-size: 48px
+    font-size: 60px
     float: left
-    letter-spacing: 2px
+    letter-spacing: 1px
 
 nav
   float: right
@@ -54,8 +54,8 @@ nav
   
   ul
     font-family: $brandon
-    font-size: 28px
-    font-weight: $regular
+    font-size: 30px
+    font-weight: $bold
     list-type: none
     letter-spacing: 1px
     
@@ -63,14 +63,14 @@ nav
       display: inline
       
     li:first-child
-      margin-right: 60px
+      margin-right: 40px
 
     li:last-child
-      margin-left: 60px
+      margin-left: 40px
 
     a:link,  a:visited, a:hover, a:active  
       color: #fff
-      opacity: 0.5
+      opacity: 0.2
       text-decoration: none
 
     a.active
@@ -84,18 +84,18 @@ main
   height: 100%
   margin: 0 auto
   text-align: center
-  top: 0
-  position: absolute
 
 
-table
+table.projects
   width: 80%
   font-family: $brandon
   margin: 315px auto 0 auto
   text-align: left
   clear: both
   tr
-    line-height: 90px
+    line-height: 30px
+    vertical-align: text-top
+    padding-bottom: 60px
 
     a:link,  a:visited, a:hover,  a:active  
       color: #ffffff
@@ -104,13 +104,18 @@ table
       text-align: left
       font-weight: $bold
       text-transform: uppercase
-      font-size: 12px
+      font-size: 15px
       line-height: 20px 
       opacity: 0.3
+      padding-bottom: 25px
     td
-      font-size: 22px
+      font-size: 25px
+      padding: 0 20px 60px 0
+    td:last-child
+      padding: 0 0 60px 20px
     .td-description
-      font-size: 18px
+      font-size: 25px
+      margin: 20px
 
 
 .margin-row
@@ -127,14 +132,16 @@ article
   section
     text-align: center
     width: 100%
-    height: 1024px
-    overflow: hidden
+    height: auto
+    overflow: auto
+    min-height: 900px
     h1
       color: $white
       font-family: $brandon
       font-weight: $bold
       font-size: 100px
-      margin: 200px auto 0 auto
+      line-height: 91px
+      margin: 200px auto 30px auto
       clear: both
 
     p
@@ -142,21 +149,70 @@ article
       font-family: $brandon
       font-weight: $regular
       font-size: 30px
-      width: 690px
+      max-width: 690px
       margin: 0 auto
       line-height: 40px
+
+    img
+      width: 80%
+      margin: 50px 0 0 0
+      vertical-align: bottom
+
+
+  .case
+    width: 100%
+    background: #F7F7F7
+    padding-bottom: 100px
+
+    img
+      width: auto
+    img.two
+      float: left
+
+
+
+    
+    table.details
+      color: #000000
+      margin: 0 auto
+      font-family: $brandon
+      font-weight: $regular
+      font-size: 18px
+
+
+      tr
+        margin: 0 0 10px 0
+        padding-bottom: 20px
+
+        th
+          text-align: right
+          padding-right: 5px 
+          
+        td
+          text-align: left
+          padding-left: 5px
+        
+          
+
+
+
+   
 
 
 
 // Footer _____________________________________________
 
+    width: 80%;
+    font-family: brandon-grotesque;
+    margin: 315px auto 0 auto;
 footer
   position: fixed
   width: auto
   z-index: 3000
   height: 30px
   bottom: 20px
-  right: 20px
+  right: 10%
+
 
   ul
     list-type: none

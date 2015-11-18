@@ -40,3 +40,12 @@ fields:
     type:  textarea
     size:  small
 
+  heroimage:
+    label: Heroimage
+    type:  text
+    width: 1/4
+
+  project:
+    label: Project
+    type:  textarea
+

@@ -24,28 +24,28 @@ header {
   header h1 {
     font-family: brandon-grotesque;
     font-font-weight: 900;
-    font-size: 48px;
+    font-size: 60px;
     float: left;
-    letter-spacing: 2px; }
+    letter-spacing: 1px; }
 
 nav {
   float: right;
   margin-top: 21px; }
   nav ul {
     font-family: brandon-grotesque;
-    font-size: 28px;
-    font-weight: 400;
+    font-size: 30px;
+    font-weight: 700;
     list-type: none;
     letter-spacing: 1px; }
     nav ul li {
       display: inline; }
     nav ul li:first-child {
-      margin-right: 60px; }
+      margin-right: 40px; }
     nav ul li:last-child {
-      margin-left: 60px; }
+      margin-left: 40px; }
     nav ul a:link, nav ul a:visited, nav ul a:hover, nav ul a:active {
       color: #fff;
-      opacity: 0.5;
+      opacity: 0.2;
       text-decoration: none; }
     nav ul a.active {
       color: #fff !important;
@@ -55,32 +55,37 @@ main {
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  text-align: center;
-  top: 0;
-  position: absolute; }
+  text-align: center; }
 
-table {
+table.projects {
   width: 80%;
   font-family: brandon-grotesque;
   margin: 315px auto 0 auto;
   text-align: left;
   clear: both; }
-  table tr {
-    line-height: 90px; }
-    table tr a:link, table tr a:visited, table tr a:hover, table tr a:active {
+  table.projects tr {
+    line-height: 30px;
+    vertical-align: text-top;
+    padding-bottom: 60px; }
+    table.projects tr a:link, table.projects tr a:visited, table.projects tr a:hover, table.projects tr a:active {
       color: #ffffff;
       text-decoration: none; }
-    table tr th {
+    table.projects tr th {
       text-align: left;
       font-weight: 700;
       text-transform: uppercase;
-      font-size: 12px;
+      font-size: 15px;
       line-height: 20px;
-      opacity: 0.3; }
-    table tr td {
-      font-size: 22px; }
-    table tr .td-description {
-      font-size: 18px; }
+      opacity: 0.3;
+      padding-bottom: 25px; }
+    table.projects tr td {
+      font-size: 25px;
+      padding: 0 20px 60px 0; }
+    table.projects tr td:last-child {
+      padding: 0 0 60px 20px; }
+    table.projects tr .td-description {
+      font-size: 25px;
+      margin: 20px; }
 
 .margin-row {
   text-align: right; }
@@ -92,23 +97,52 @@ table {
 article section {
   text-align: center;
   width: 100%;
-  height: 1024px;
-  overflow: hidden; }
+  height: auto;
+  overflow: auto;
+  min-height: 900px; }
   article section h1 {
     color: #ffffff;
     font-family: brandon-grotesque;
     font-weight: 700;
     font-size: 100px;
-    margin: 200px auto 0 auto;
+    line-height: 91px;
+    margin: 200px auto 30px auto;
     clear: both; }
   article section p {
     color: #ffffff;
     font-family: brandon-grotesque;
     font-weight: 400;
     font-size: 30px;
-    width: 690px;
+    max-width: 690px;
     margin: 0 auto;
     line-height: 40px; }
+  article section img {
+    width: 80%;
+    margin: 50px 0 0 0;
+    vertical-align: bottom; }
+article .case {
+  width: 100%;
+  background: #F7F7F7;
+  padding-bottom: 100px; }
+  article .case img {
+    width: auto; }
+  article .case img.two {
+    float: left; }
+  article .case table.details {
+    color: #000000;
+    margin: 0 auto;
+    font-family: brandon-grotesque;
+    font-weight: 400;
+    font-size: 18px; }
+    article .case table.details tr {
+      margin: 0 0 10px 0;
+      padding-bottom: 20px; }
+      article .case table.details tr th {
+        text-align: right;
+        padding-right: 5px; }
+      article .case table.details tr td {
+        text-align: left;
+        padding-left: 5px; }
 
 footer {
   position: fixed;
@@ -116,7 +150,7 @@ footer {
   z-index: 3000;
   height: 30px;
   bottom: 20px;
-  right: 20px; }
+  right: 10%; }
   footer ul {
     list-type: none; }
     footer ul li {

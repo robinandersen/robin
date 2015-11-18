@@ -7,10 +7,9 @@ password: >
 language: en
 role: admin
 history:
-  - home/betty
-  - home/byggmakker
-  - home/morgenbladet
+  - home/up2
+  - home/intersport-brand-and-website
   - home
-  - journal
+  - home/byggmakker
 firstname: Robin
 lastname: Andersen
