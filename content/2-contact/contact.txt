@@ -1,8 +1,0 @@
-Title: about
-
-----
-
-Text: 
-
-##My name is Robin
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque viverra tellus nec eros tempor, non ullamcorper ex pretium. Suspendisse potenti. Mauris varius nulla nec rhoncus congue. Aenean efficitur sodales tincidunt. In sed mi sollicitudin, congue ligula elementum, vulputate ligula. Duis pulvinar, risus suscipit gravida feugiat, urna dui tempus magna, quis commodo orci metus vitae ante. Vestibulum mattis felis quis augue suscipit, nec condimentum justo faucibus. Ut quis ex id metus sodales porta. Aliquam ultrices at mauris ut fringilla. Morbi accumsan viverra neque ut dignissim. Sed condimentum dignissim tellus et hendrerit. Mauris pellentesque justo dapibus ex pretium auctor.

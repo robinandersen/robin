@@ -12,27 +12,29 @@ footer, header, hgroup, main, nav, section, summary {
 
 html {
   background: #0f0f0f;
-  color: #ffffff; }
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  font-family: brandon-grotesque; }
 
 header {
   width: 80%;
-  margin: 0 50%;
+  margin: 0 10%;
   position: absolute;
   z-index: 1000;
-  right: -40%;
   top: 100px; }
   header h1 {
-    font-family: brandon-grotesque;
-    font-font-weight: 900;
+    font-weight: 900;
     font-size: 60px;
     float: left;
     letter-spacing: 1px; }
+    header h1 a, header h1 a:visited {
+      text-decoration: none;
+      color: #ffffff; }
 
 nav {
   float: right;
-  margin-top: 21px; }
+  margin-top: 27px; }
   nav ul {
-    font-family: brandon-grotesque;
     font-size: 30px;
     font-weight: 700;
     list-type: none;
@@ -40,9 +42,9 @@ nav {
     nav ul li {
       display: inline; }
     nav ul li:first-child {
-      margin-right: 40px; }
+      margin-right: 20px; }
     nav ul li:last-child {
-      margin-left: 40px; }
+      margin-left: 20px; }
     nav ul a:link, nav ul a:visited, nav ul a:hover, nav ul a:active {
       color: #fff;
       opacity: 0.2;
@@ -59,7 +61,6 @@ main {
 
 table.projects {
   width: 80%;
-  font-family: brandon-grotesque;
   margin: 315px auto 0 auto;
   text-align: left;
   clear: both; }
@@ -78,6 +79,9 @@ table.projects {
       line-height: 20px;
       opacity: 0.3;
       padding-bottom: 25px; }
+    table.projects tr th.row-year {
+      text-align: right;
+      padding-right: 14px; }
     table.projects tr td {
       font-size: 25px;
       padding: 0 20px 60px 0; }
@@ -90,69 +94,130 @@ table.projects {
 .margin-row {
   text-align: right; }
 
-.row-year {
-  text-align: right;
-  padding-right: 20px; }
-
-article section {
+article .beginning {
   text-align: center;
   width: 100%;
   height: auto;
-  overflow: auto;
-  min-height: 900px; }
-  article section h1 {
+  padding: 0 20px;
+  overflow: auto; }
+  article .beginning h1 {
     color: #ffffff;
-    font-family: brandon-grotesque;
-    font-weight: 700;
-    font-size: 100px;
-    line-height: 91px;
-    margin: 200px auto 30px auto;
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 60px;
+    margin: 200px auto 0px auto;
     clear: both; }
-  article section p {
+  article .beginning h2 {
     color: #ffffff;
-    font-family: brandon-grotesque;
-    font-weight: 400;
-    font-size: 30px;
-    max-width: 690px;
-    margin: 0 auto;
-    line-height: 40px; }
-  article section img {
+    font-weight: 300;
+    font-size: 35px;
+    opacity: 0.5;
+    filter: alpha(opacity=50); }
+  article .beginning img {
     width: 80%;
     margin: 50px 0 0 0;
     vertical-align: bottom; }
 article .case {
   width: 100%;
-  background: #F7F7F7;
-  padding-bottom: 100px; }
-  article .case img {
-    width: auto; }
-  article .case img.two {
-    float: left; }
-  article .case table.details {
-    color: #000000;
-    margin: 0 auto;
-    font-family: brandon-grotesque;
-    font-weight: 400;
+  background: #ffffff;
+  padding: 0 20px 100px 20px;
+  overflow: auto;
+  color: #0f0f0f;
+  line-height: 33px; }
+  article .case .case-intro {
+    max-width: 880px;
+    text-align: left;
+    margin: 55px auto 0 auto;
+    font-size: 18px;
+    overflow: auto; }
+    article .case .case-intro #credits {
+      max-width: 283px;
+      float: left; }
+      article .case .case-intro #credits tr {
+        vertical-align: top; }
+      article .case .case-intro #credits th {
+        font-weight: 400;
+        padding-right: 10px; }
+      article .case .case-intro #credits td {
+        font-weight: 700; }
+    article .case .case-intro #intro {
+      max-width: 565px;
+      float: right; }
+      article .case .case-intro #intro p {
+        margin-bottom: 30px; }
+  article .case figure {
+    margin: 50px auto 50px auto;
+    max-width: 900px; }
+    article .case figure img {
+      max-width: 100%; }
+  article .case figcaption {
+    color: #999999;
     font-size: 18px; }
-    article .case table.details tr {
-      margin: 0 0 10px 0;
-      padding-bottom: 20px; }
-      article .case table.details tr th {
-        text-align: right;
-        padding-right: 5px; }
-      article .case table.details tr td {
-        text-align: left;
-        padding-left: 5px; }
+  article .case h3 {
+    max-width: 536px;
+    text-align: left;
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: 900; }
+  article .case p {
+    max-width: 536px;
+    text-align: left;
+    margin: 0 auto;
+    font-size: 18px; }
+
+#pagnation {
+  max-width: 80%;
+  text-align: center;
+  margin: 100px auto;
+  font-weight: 500;
+  font-size: 18px; }
+  #pagnation a, #pagnation a:visited {
+    text-decoration: none;
+    color: #0f0f0f;
+    border-bottom: 2px solid #0f0f0f;
+    margin: 0 20px; }
+
+#about {
+  margin: 300px auto 0px auto;
+  text-align: left;
+  max-width: 534px;
+  font-size: 18px;
+  line-height: 33px;
+  padding: 0 20px 100px 20px; }
+  #about p {
+    margin-bottom: 30px; }
+  #about .about-intro {
+    font-weight: 400;
+    font-size: 25px; }
+  #about ul {
+    list-style-type: none; }
+    #about ul li {
+      display: inline-block;
+      font-weight: 500;
+      border-bottom: #ffffff 2px solid;
+      line-height: 25px; }
+      #about ul li a, #about ul li a:visited {
+        text-decoration: none;
+        color: #ffffff; }
+    #about ul li:first-child {
+      margin-right: 20px; }
 
 footer {
   position: fixed;
-  width: auto;
+  width: 80%;
   z-index: 3000;
   height: 30px;
   bottom: 20px;
-  right: 10%; }
+  right: 10%;
+  text-shadow: 0px 0px 10px #000000, 0px 0px 10px #000000, 0px 0px 10px #000000, 0px 0px 10px #000000; }
+  footer p {
+    float: left;
+    text-align: left;
+    font-family: brandon-grotesque;
+    font-weight: 700; }
   footer ul {
-    list-type: none; }
+    list-type: none;
+    float: right; }
     footer ul li {
       display: inline;
       font-family: brandon-grotesque;
@@ -243,54 +308,159 @@ footer {
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0); } }
-.fadein {
-  -webkit-animation-name: fadein;
-  -moz-animation-name: fadein;
-  -ms-animation-name: fadein;
-  animation-name: fadein;
-  -webkit-animation-duration: 0.5s;
-  -moz-animation-duration: 0.5s;
-  -ms-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease-in-out;
-  -moz-animation-timing-function: ease-in-out;
-  -ms-animation-timing-function: ease-in-out;
-  animation-timing-function: ease-in-out; }
+@media screen and (max-width: 800px) {
+  header {
+    top: 50px;
+    width: 90%;
+    margin: 0 5%; }
 
-.fadeinup {
-  -webkit-animation-name: fadeinup;
-  -moz-animation-name: fadeinup;
-  -ms-animation-name: fadeinup;
-  animation-name: fadeinup;
-  -webkit-animation-duration: 0.5s;
-  -moz-animation-duration: 0.5s;
-  -ms-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease-out;
-  -moz-animation-timing-function: ease-out;
-  -ms-animation-timing-function: ease-out;
-  animation-timing-function: ease-out;
-  -webkit-animation-delay: 0.3s;
-  -moz-animation-delay: 0.3s;
-  -ms-animation-delay: 0.3s;
-  animation-delay: 0.3s; }
+  main table.projects {
+    width: 90%;
+    margin: 220px auto 0 auto; }
+    main table.projects tr th:nth-child(2) {
+      display: none; }
+  main tr.project .td-description {
+    display: none; }
 
-.is-exiting {
-  -webkit-animation-name: fadeout;
-  -moz-animation-name: fadeout;
-  -ms-animation-name: fadeout;
-  animation-name: fadeout;
-  -webkit-animation-duration: 0.5s;
-  -moz-animation-duration: 0.5s;
-  -ms-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease-out;
-  -moz-animation-timing-function: ease-out;
-  -ms-animation-timing-function: ease-out;
-  animation-timing-function: ease-out;
-  -webkit-animation-delay: 0.3s;
-  -moz-animation-delay: 0.3s;
-  -ms-animation-delay: 0.3s;
-  animation-delay: 0.3s; }
+  footer {
+    width: 90%;
+    right: 5%; }
+
+  article .beginning {
+    text-align: center;
+    width: 100%;
+    height: auto;
+    overflow: auto; }
+    article .beginning h1 {
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 56px;
+      line-height: 60px;
+      margin: 200px auto 0px auto;
+      clear: both; }
+    article .beginning h2 {
+      color: #ffffff;
+      font-weight: 300;
+      font-size: 35px;
+      opacity: 0.5;
+      filter: alpha(opacity=50); }
+    article .beginning img {
+      width: 80%;
+      margin: 50px 0 0 0;
+      vertical-align: bottom; }
+  article .case .case-intro #credits {
+    max-width: 40%;
+    font-size: 16px;
+    line-height: 25px; }
+  article .case .case-intro #intro {
+    max-width: 60%; } }
+@media screen and (max-width: 500px) {
+  header nav li:first-child {
+    margin-right: 20px; }
+  header nav li:last-child {
+    margin-left: 20px; }
+
+  article .beginning {
+    text-align: center;
+    width: 100%;
+    height: auto;
+    overflow: auto; }
+    article .beginning h1 {
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 56px;
+      line-height: 60px;
+      margin: 200px auto 0px auto;
+      clear: both; }
+    article .beginning h2 {
+      color: #ffffff;
+      font-weight: 300;
+      font-size: 35px;
+      opacity: 0.5;
+      filter: alpha(opacity=50); }
+    article .beginning img {
+      width: 80%;
+      margin: 50px 0 0 0;
+      vertical-align: bottom; }
+  article .case .case-intro {
+    margin-top: 30px; }
+    article .case .case-intro #credits {
+      max-width: 400px;
+      font-size: 16px;
+      line-height: 25px;
+      float: none; }
+    article .case .case-intro #intro {
+      max-width: 100%;
+      margin-top: 30px;
+      float: none; } }
+@media screen and (max-width: 375px) {
+  header {
+    top: 20px; }
+    header h1 {
+      font-size: 50px; }
+      header h1 a, header h1 a:visited {
+        text-decoration: none;
+        color: #ffffff; }
+
+  nav {
+    float: right;
+    margin-top: 23px; }
+    nav ul {
+      font-size: 25px;
+      font-weight: 700;
+      list-type: none;
+      letter-spacing: 1px; }
+      nav ul li {
+        display: inline; }
+      nav ul li:first-child {
+        margin-right: 10px; }
+      nav ul li:last-child {
+        margin-left: 10px; }
+      nav ul a:link, nav ul a:visited, nav ul a:hover, nav ul a:active {
+        color: #fff;
+        opacity: 0.2;
+        text-decoration: none; }
+      nav ul a.active {
+        color: #fff !important;
+        opacity: 1; }
+
+  main {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: center; }
+    main table.projects {
+      width: 90%;
+      margin: 150px auto 0 auto;
+      text-align: left;
+      clear: both; }
+      main table.projects tr {
+        line-height: 30px;
+        vertical-align: text-top;
+        padding-bottom: 30px; }
+        main table.projects tr a:link, main table.projects tr a:visited, main table.projects tr a:hover, main table.projects tr a:active {
+          color: #ffffff;
+          text-decoration: none; }
+        main table.projects tr th {
+          text-align: left;
+          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 12px;
+          line-height: 20px;
+          opacity: 0.3;
+          padding-bottom: 15px; }
+        main table.projects tr th.row-year {
+          text-align: right;
+          padding-right: 14px; }
+        main table.projects tr td {
+          font-size: 20px;
+          padding: 0 20px 60px 0; }
+        main table.projects tr td:last-child {
+          padding: 0 0 60px 20px; }
+        main table.projects tr .td-description {
+          font-size: 25px;
+          margin: 20px; }
+    main .margin-row {
+      text-align: right; } }
 
 /*# sourceMappingURL=main.css.map */

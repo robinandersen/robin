@@ -1,0 +1,41 @@
+Title: Morgenbladet Idents
+
+----
+
+Client: Morgenbladet
+
+----
+
+Type: motion
+
+----
+
+Year: 2014
+
+----
+
+Text: 2 short animations for Norways first daily Newspaper
+
+----
+
+Intro: A curious, intelligent company run by creative folks that love to surprise and delight their users. Here are a few of the many pieces we've created for them.
+
+----
+
+Color: #E84D3C
+
+----
+
+Project: 
+
+----
+
+Role: 
+
+----
+
+Developer: 
+
+----
+
+Agency: 

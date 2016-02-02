@@ -14,4 +14,4 @@ Keywords: Robin Andersen,Product design,design,app,designer
 
 ----
 
-Copyright: © 2015-(date: Year)
+Copyright: © Robin Andersen 2015-(date: Year)

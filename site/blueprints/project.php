@@ -5,18 +5,36 @@ pages: false
 files:
   sortable: true
 fields:
-  
+
   title:
     label: Title
     type:  text
-  
-  client:
-    label: Client
+
+  cover:
+    label: Cover
+    type:  textarea
+
+  color:
+    label: Background Color
     type:  text
-    width: 1/2
+    width: 1/4
 
   type:
     label: Type
+    type:  text
+
+  client:
+    label: Client
+    type:  text
+    width: 1/4
+
+  agency:
+    label: Agency
+    type:  text
+    width: 1/4
+
+  developer:
+    label: Developer
     type:  text
     width: 1/4
 
@@ -30,22 +48,11 @@ fields:
     type:  textarea
     size:  small
 
-  color:
-    label: Background Color
-    type:  text
-    width: 1/4
-
   intro:
     label: Intro
     type:  textarea
     size:  small
 
-  heroimage:
-    label: Heroimage
-    type:  text
-    width: 1/4
-
   project:
     label: Project
     type:  textarea
-
