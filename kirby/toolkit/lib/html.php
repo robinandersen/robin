@@ -218,9 +218,12 @@ class Html {
    * @return string the generated html
    */
   public static function email($email, $text = null, $attr = array()) {
+    if(empty($text)) {
+      // show only the eMail address without additional parameters (if the 'text' argument is empty)
+      $text = str::encode(a::first(str::split($email, '?'))); 
+    }
     $email = str::encode($email);
     $attr  = array_merge(array('href' => 'mailto:' . $email), $attr);
-    if(empty($text)) $text = $email;
     return static::tag('a', $text, $attr);
   }
 
