@@ -6,7 +6,7 @@ Client: Grand Tours Project
 
 ----
 
-Type: Web site
+Type: Website
 
 ----
 
