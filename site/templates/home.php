@@ -2,7 +2,7 @@
 
 	<main id="main" class="fadein">
 
-		<table>
+		<table class="projects">
 		  <tr>
 		    <th>Project</th>
 		    <th>Description</th>		
@@ -10,7 +10,7 @@
 		    <th class="row-year">Year</th>
 		  </tr>
 			
-		<?php foreach($page->children()->visible()->flip() as $article): ?>
+		<?php foreach($page->children()->visible() as $article): ?>
 		  
 		  <tr class="project">
 		  
