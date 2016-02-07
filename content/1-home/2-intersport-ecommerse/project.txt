@@ -24,25 +24,25 @@ Color: #0043A3
 
 Intro: 
 
-Intersport er en av verdens aller største sporskjeder med ca 5500 butikker spredt på 44 land. I Norge ' kjeden blandt de største, med en markedsandel på 12%. Selv om Intersport  har ca 100 butikker i Norge har de ikke hatt en digital en før nå. 
+Intersport is one of the world's biggest sports chains with about 5,500 stores spread across 44 countries. In Norway is the chain among the largest, with a market share of 12%. Although Intersport has about 100 stores in Norway has not had a digital service until now. 
 
 ##My roll
-Jeg jobbet som designer på dette prosjektet. Mine hovedoppgaver var: Interface & experience design, prototyping og ikon design. Altså  alt fra knapper, handlelister, input felt, checkboxer, kampanjemoduler, produktsider og det generelle design systemet.
+I worked as a designer on this project. My main tasks were: Interface & experience design, prototyping and icon design. Everything from buttons, shopping lists, input fields, check boxer, campaign modules, product pages and the overall design system is made by me.
 
 ----
 
 Project: 
 
 (image: produktside.jpg)
-Making the product page easy to understand. Was one of the things we had to get right. There was a lot of different dependencies like color, size, is it a campaign?, is it new? and so on. All this had to stand out to make it a breeze to buy the product.
+Making the product page easy to understand. Was one of the key pages we had to get right. There was a lot of different dependencies like color, size, is it a campaign?, is it new? and so on. All this had to stand out to make it a breeze to buy the product.
 
 (image: handlekurv.jpg)
-Shopping cart sliding in from the right giving you two options. Continue shopping or go to checkout.
+Shopping cart sliding in from the right giving you two options. Continue shopping or go to the checkout.
 
 (image: arikkelmal-medium.jpg)
 
 (image: mobile.jpg)
-The new intersport.no had to be easy to use on all devices and screens.
+The new site had to be easy to use on all devices and screens.
 
 ----
 
@@ -57,5 +57,5 @@ Agency: Jimmy Royal
 Cover: 
 
 #Intersport eCommerce
-##Clean, new, and easy to use
+##First online store
 (image: cover.jpg)

@@ -8,9 +8,9 @@ language: en
 role: admin
 history:
   - home/norway-designs
+  - home/grand-tours-project
   - home/byggmakker
   - home/intersport-ecommerse
   - about
-  - home/grand-tours-project
 firstname: Robin
 lastname: Andersen

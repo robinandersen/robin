@@ -2,7 +2,7 @@ Title: Norway Designs
 
 ----
 
-Client: Norway Designs
+Client: 
 
 ----
 
@@ -34,7 +34,7 @@ Developer:
 
 ----
 
-Agency: Jimmy Royal
+Agency: 
 
 ----
 
