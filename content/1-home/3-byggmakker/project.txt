@@ -1,0 +1,62 @@
+Title: IQ game for Norges Bank
+
+----
+
+Client: Norges Bank
+
+----
+
+Type: Game
+
+----
+
+Year: 2014
+
+----
+
+Text: Are you smart enough to run the Norwegian economy?
+
+----
+
+Color: #282828
+
+----
+
+Intro: 
+
+På sommeren i 2014 skulle Norges Bank forsøke å tiltrekke seg oppmerksomheten til fremtidige kolegaer. Nemelig de beste økonomistudentene i Landet. For å gjøre dette designet og utvilket Jimmy Royal et spill tilpasset en touch skjerm på 32 tommer som skulle stå i rekruteringsteltet. Ved å klare de 4 testene hukommelse, matematikk, stress og multitask fikk man en kode man kunne sende til et hjemmesnekret safe hvor premien kunne hentes ut; En invitasjon til å vurdere Norges Bank som sin arbeidsplass etter endt studietid.  
+
+###My role
+Jeg jobbet som designer av hele løsningen i tett samarbeid med utviklerene og konsept ansvarlige på Jimmy Royal. Samt prototyping og testing for å finne det rette vansklighetsnivået samt gjøre det lett for brukerene å raskt oppfatte de fire oppgavene og komme seg igjennom løsningen.
+
+----
+
+Project: 
+
+(image: 01.jpg)
+(image: 02.jpg)
+(image: 03.jpg)
+(image: 04.jpg)
+(image: 05.jpg)
+(image: 06.jpg)
+(image: 07.jpg)
+
+----
+
+Role: 
+
+----
+
+Developer: Jimmy Royal
+
+----
+
+Agency: Jimmy Royal
+
+----
+
+Cover: 
+
+#IQ game for Norges Bank
+## Are you smart enough to run the Norwegian economy?
+(image: cover.jpg)

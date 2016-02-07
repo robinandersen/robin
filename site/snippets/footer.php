@@ -9,7 +9,6 @@
   		</ul>-->
 
   	</footer>
-<script src="assets/js/retina.min.js"></script>
 </body>
 
 

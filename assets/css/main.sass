@@ -30,11 +30,13 @@ footer, header, hgroup, main, nav, section, summary
 
 // Header _____________________________________________
 
+
 html
   background: $dark
   color: #ffffff
   -webkit-font-smoothing: antialiased
-  font-family: $brandon
+  font-family: $brandon, sans-serif
+
 
 header
   width: 80%
@@ -84,6 +86,9 @@ nav
       opacity: 1
 
 // Home _____________________________________________
+
+.artHovered
+  opacity: 0.5
 
 main
   width: 100%
@@ -243,13 +248,21 @@ article
 #about
   margin: 300px auto 0px auto
   text-align: left
-  max-width: 534px
+  max-width: 650px
   font-size: 18px
   line-height: 33px
   padding: 0 20px 100px 20px
 
+  a, a:visited,
+    text-decoration: none
+    color: $white
+    border-bottom: $white 2px solid
+    line-height: 25px
+    display: inline-block
+
   p
     margin-bottom: 30px
+
 
   .about-intro
     font-weight: $regular
@@ -260,11 +273,8 @@ article
     li
       display: inline-block
       font-weight: $medium
-      border-bottom: $white 2px solid
       line-height: 25px
-      a, a:visited,
-        text-decoration: none
-        color: $white
+
 
     li:first-child
       margin-right: 20px
