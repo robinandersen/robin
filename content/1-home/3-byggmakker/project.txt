@@ -24,7 +24,7 @@ Color: #282828
 
 Intro: 
 
-In the summer 2014 Norges Bank attempted to attract the attention of future team mates. In fact the best economics students in the country. To do so Jimmy Royal designed and engineered a game adapted to a 32 inches touch screen. A screen that would stand in the recruitment tent to attract attention. When the four tests: memory, math, stress and multitask was cleared got you a code you could send to a safe (connected to the screen) where the prize could be claimed; An invitation to consider Norges Bank as their workplace after completed studies.
+During the summer in 2014 Norges Bank attempted to attract the attention of future team mates. In fact the best economics students in the country. To do so Jimmy Royal designed and developed a game made for a 32 inches touch screen. A screen that would stand in the recruitment tent to attract attention. When the four tests: memory, math, stress and multitask were cleared you got a code you could send to a safe (connected to the screen) where the prize could be claimed; An invitation to consider Norges Bank as their workplace after completed studies.
 
 ###My role
 I worked as a designer for the entire solution in close collaboration with developers and concept developers in Jimmy Royal. Prototyping and testing to find the right difficulty level as well as make it easy for users to quickly perceive the four tasks and get through the game.

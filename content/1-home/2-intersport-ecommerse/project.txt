@@ -24,20 +24,20 @@ Color: #0043A3
 
 Intro: 
 
-Intersport is one of the world's biggest sports chains with about 5,500 stores spread across 44 countries. In Norway is the chain among the largest, with a market share of 12%. Although Intersport has about 100 stores in Norway has not had a digital service until now. 
+Intersport is one of the world's biggest sports chains with about 5,500 stores spread across 44 countries. In Norway the chain is among the largest, with a market share of 12%. Although Intersport has about 100 stores in Norway  they had no online store until now. 
 
 ##My roll
-I worked as a designer on this project. My main tasks were: Interface & experience design, prototyping and icon design. Everything from buttons, shopping lists, input fields, check boxer, campaign modules, product pages and the overall design system is made by me.
+I worked as a designer on this project. My main tasks were: Interface & experience design, prototyping and icon design. Everything from buttons, shopping lists, input fields, check boxes, campaign modules, product pages and the overall design system is made by me.
 
 ----
 
 Project: 
 
 (image: produktside.jpg)
-Making the product page easy to understand. Was one of the key pages we had to get right. There was a lot of different dependencies like color, size, is it a campaign?, is it new? and so on. All this had to stand out to make it a breeze to buy the product.
+Making the product page easy to understand was one of the key pages we had to get right. There was a lot of different dependencies like color, size, is it a campaign?, is it new? and so on. All this had to stand out and at the same time fit well together to make it a breeze to buy the product.
 
 (image: handlekurv.jpg)
-Shopping cart sliding in from the right giving you two options. Continue shopping or go to the checkout.
+Shopping cart sliding in from the right, giving the client two options. Continue shopping or go to the checkout.
 
 (image: arikkelmal-medium.jpg)
 
