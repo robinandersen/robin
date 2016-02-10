@@ -3,7 +3,7 @@
 
   <article>
 
-    <section class="beginning" style="background-color:<?php echo $page->color()->html() ?>" >
+    <section class="beginning fadein" style="background-color:<?php echo $page->color()->html() ?>" >
       <?php echo $page->cover()->kirbytext() ?>
     </section>
 

@@ -54,7 +54,7 @@ nav {
       opacity: 1; }
 
 .artHovered {
-  opacity: 0.2; }
+  opacity: 0.5; }
 
 main {
   width: 100%;
@@ -313,56 +313,6 @@ footer {
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0); } }
-.fadein {
-  -webkit-animation-name: fadein;
-  -moz-animation-name: fadein;
-  -ms-animation-name: fadein;
-  animation-name: fadein;
-  -webkit-animation-duration: 0.5s;
-  -moz-animation-duration: 0.5s;
-  -ms-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease-in-out;
-  -moz-animation-timing-function: ease-in-out;
-  -ms-animation-timing-function: ease-in-out;
-  animation-timing-function: ease-in-out; }
-
-.fadeinup {
-  -webkit-animation-name: fadeinup;
-  -moz-animation-name: fadeinup;
-  -ms-animation-name: fadeinup;
-  animation-name: fadeinup;
-  -webkit-animation-duration: 0.5s;
-  -moz-animation-duration: 0.5s;
-  -ms-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease-out;
-  -moz-animation-timing-function: ease-out;
-  -ms-animation-timing-function: ease-out;
-  animation-timing-function: ease-out;
-  -webkit-animation-delay: 0.3s;
-  -moz-animation-delay: 0.3s;
-  -ms-animation-delay: 0.3s;
-  animation-delay: 0.3s; }
-
-.is-exiting {
-  -webkit-animation-name: fadeout;
-  -moz-animation-name: fadeout;
-  -ms-animation-name: fadeout;
-  animation-name: fadeout;
-  -webkit-animation-duration: 0.5s;
-  -moz-animation-duration: 0.5s;
-  -ms-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease-out;
-  -moz-animation-timing-function: ease-out;
-  -ms-animation-timing-function: ease-out;
-  animation-timing-function: ease-out;
-  -webkit-animation-delay: 0.3s;
-  -moz-animation-delay: 0.3s;
-  -ms-animation-delay: 0.3s;
-  animation-delay: 0.3s; }
-
 @media screen and (max-width: 800px) {
   header {
     top: 50px;
@@ -485,12 +435,12 @@ footer {
     margin: 0 auto;
     text-align: center; }
     main table.projects {
-      width: 95%;
+      width: 90%;
       margin: 150px auto 0 auto;
       text-align: left;
       clear: both; }
       main table.projects tr {
-        line-height: 20px;
+        line-height: 30px;
         vertical-align: text-top;
         padding-bottom: 30px; }
         main table.projects tr a:link, main table.projects tr a:visited, main table.projects tr a:hover, main table.projects tr a:active {
@@ -500,19 +450,22 @@ footer {
           text-align: left;
           font-weight: 700;
           text-transform: uppercase;
-          font-size: 10px;
+          font-size: 12px;
+          line-height: 20px;
           opacity: 0.3;
-          padding-bottom: 5px; }
+          padding-bottom: 15px; }
         main table.projects tr th.row-year {
           text-align: right;
-          padding-right: 0; }
+          padding-right: 14px; }
         main table.projects tr td {
-          font-size: 16px;
-          margin-bottom: 10px;
-          padding: 0 20px 25px 0; }
+          font-size: 20px;
+          padding: 0 20px 60px 0; }
         main table.projects tr td:last-child {
-          padding: 0 0 0px 0px; }
+          padding: 0 0 60px 20px; }
+        main table.projects tr .td-description {
+          font-size: 25px;
+          margin: 20px; }
     main .margin-row {
       text-align: right; } }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=maincss.map */

@@ -2,7 +2,7 @@
 
   <main class="main" role="main">
 
-    <div id="about">
+    <div id="about" class="fadein">
       <div class="about-intro"><?php echo $page->intro()->kirbytext() ?></div>
       <?php echo $page->about()->kirbytext() ?>
       <ul>
