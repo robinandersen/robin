@@ -1,6 +1,12 @@
 <?php
 
-class PasswordField extends TextField {
+class PasswordField extends InputField {
+
+  static public $assets = array(
+    'js' => array(
+      'password.js'
+    )
+  );
 
   public $suggestion = false;
 
@@ -8,7 +14,7 @@ class PasswordField extends TextField {
 
     $this->type  = 'password';
     $this->icon  = 'key';
-    $this->label = l('fields.password.label', 'Password');
+    $this->label = l::get('fields.password.label', 'Password');
 
   }
 

@@ -16,14 +16,14 @@ class Data {
 
   const ERROR_INVALID_ADAPTER = 0;
 
-  public static $adapters = array();
+  static public $adapters = array();
 
-  public static function adapter($type) {
+  static public function adapter($type) {
 
     if(isset(static::$adapters[$type])) return static::$adapters[$type];
 
     foreach(static::$adapters as $adapter) {
-      if(is_array($adapter['extension']) && in_array($type, $adapter['extension'])) {
+      if(is_array($adapter['extension']) and in_array($type, $adapter['extension'])) {
         return $adapter;
       } else if($adapter['extension'] == $type) {
         return $adapter;
@@ -34,17 +34,17 @@ class Data {
 
   }
 
-  public static function encode($data, $type) {
+  static public function encode($data, $type) {
     $adapter = static::adapter($type);
     return call_user_func($adapter['encode'], $data);
   }
 
-  public static function decode($data, $type) {
+  static public function decode($data, $type) {
     $adapter = static::adapter($type);
     return call_user_func($adapter['decode'], $data);
   }
 
-  public static function read($file, $type = null) {
+  static public function read($file, $type = null) {
 
     // type autodetection
     if(is_null($type)) $type = f::extension($file);
@@ -61,7 +61,7 @@ class Data {
 
   }
 
-  public static function write($file, $data, $type = null) {
+  static public function write($file, $data, $type = null) {
     // type autodetection
     if(is_null($type)) $type = f::extension($file);
     return f::write($file, data::encode($data, $type));
@@ -94,14 +94,7 @@ data::$adapters['kd'] = array(
     $result = array();
     foreach($data AS $key => $value) {
       $key = str::ucfirst(str::slug($key));
-
-      if(empty($key) || is_null($value)) continue;
-
-      // avoid problems with arrays
-      if(is_array($value)) {
-        $value = '';
-      }
-
+      if(empty($key) or is_null($value)) continue;
       // escape accidental dividers within a field
       $value = preg_replace('!(\n|^)----(.*?\R*)!', "$1\\----$2", $value);
 
@@ -151,7 +144,7 @@ data::$adapters['php'] = array(
   'encode' => function($array) {
     return '<?php ' . PHP_EOL . PHP_EOL . 'return ' . var_export($array, true) . PHP_EOL . PHP_EOL . '?>';
   },
-  'decode' => function() {
+  'decode' => function($string) {
     throw new Error('Decoding PHP strings is not supported');
   },
   'read' => function($file) {

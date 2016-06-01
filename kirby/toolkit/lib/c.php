@@ -13,5 +13,5 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 class C extends Silo {
-  public static $data = array();
+  static public $data = array();
 }

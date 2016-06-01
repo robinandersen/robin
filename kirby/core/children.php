@@ -38,9 +38,7 @@ abstract class ChildrenAbstract extends Pages {
    * @param array $data
    */
   public function create($uid, $template, $data = array()) {
-    $page = page::create($this->page->id() . '/' . $uid, $template, $data);
-    $this->data[$page->id()] = $page;
-    return $page;
+    return page::create($this->page->id() . '/' . $uid, $template, $data);
   }
 
   /**
@@ -191,6 +189,7 @@ abstract class ChildrenAbstract extends Pages {
 
   }
 
+<<<<<<< HEAD
   /**
    * Extended group method
    * detaches children and converts them to 
@@ -204,4 +203,6 @@ abstract class ChildrenAbstract extends Pages {
     return $collection->group($callback);
   }
 
+=======
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
 }

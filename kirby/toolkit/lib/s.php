@@ -14,6 +14,7 @@
  */
 class S {
 
+<<<<<<< HEAD
   public static $started = false;
   public static $name    = 'kirby_session';
   public static $timeout = 30;
@@ -115,14 +116,16 @@ class S {
       return '';
     }
   }
+=======
+  static protected $started = false;
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
 
   /**
    * Returns the current session id
    * 
    * @return string
    */  
-  public static function id() {
-    static::start();
+  static public function id() {
     return session_id();
   }
 
@@ -146,17 +149,13 @@ class S {
    * @param  mixed   $key The key to define
    * @param  mixed   $value The value for the passed key
    */    
-  public static function set($key, $value = false) {
-
-    static::start();
-
+  static public function set($key, $value = false) {
     if(!isset($_SESSION)) return false;
     if(is_array($key)) {
       $_SESSION = array_merge($_SESSION, $key);
     } else {
       $_SESSION[$key] = $value;
     }
-
   }
 
   /**
@@ -176,27 +175,10 @@ class S {
    * @param  mixed    $default Optional default value, which should be returned if no element has been found
    * @return mixed
    */  
-  public static function get($key = false, $default = null) {
-
-    static::start(static::$name, static::$timeout, static::$cookie);
-
+  static public function get($key = false, $default = null) {
     if(!isset($_SESSION)) return false;
     if(empty($key)) return $_SESSION;
     return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
-
-  }
-
-  /**
-   * Retrieves an item and removes it afterwards
-   * 
-   * @param string $key
-   * @param mixed $default
-   * @return mixed
-   */
-  public static function pull($key, $default = null) {
-    $value = s::get($key, $default); 
-    s::remove($key);
-    return $value;
   }
 
   /**
@@ -219,22 +201,26 @@ class S {
    * @param  mixed    $key The key to remove by
    * @return array    The session array without the value
    */  
-  public static function remove($key) {
-
-    static::start();
-
+  static public function remove($key) {
     unset($_SESSION[$key]);
     return $_SESSION;
-
   }
 
   /**
-   * Checks if the session has already been started
+   * Starts a new session
+   *
+   * <code>
    * 
-   * @return boolean
-   */
-  public static function started() {
-    return static::$started;
+   * s::start();
+   * // do whatever you want with the session now
+   * 
+   * </code>
+   * 
+   */  
+  static public function start() {
+    if(static::$started) return true;
+    session_start();
+    static::$started = true;
   }
 
   /**
@@ -251,41 +237,27 @@ class S {
    * </code>
    *
    */  
-  public static function destroy() {
-
-    if(!static::$started) return false;
-
-    $_SESSION = array();
-
-    cookie::remove(static::$name);
-
-    static::$started = false;
-
-    return session_destroy();
-
+  static public function destroy() {
+    if(static::$started){
+      session_destroy();
+      unset($_SESSION);
+      static::$started = false;
+    }
   }
 
   /**
    * Alternative for s::destroy()
    */
-  public static function stop() {
+  static public function stop() {
     s::destroy();
   }
 
   /**
    * Destroys a session first and then starts it again
    */  
-  public static function restart() {
+  static public function restart() {
     static::destroy();
     static::start();
-  }
-
-  /**
-   * Create a new session Id
-   */
-  public static function regenerateId() {
-    static::start(static::$name, static::$timeout, static::$cookie);
-    session_regenerate_id(true);      
   }
 
 }

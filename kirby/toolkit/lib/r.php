@@ -14,20 +14,20 @@
 class R {
 
   // Stores the raw request data
-  protected static $raw = null;
+  static protected $raw = null;
 
   // Stores all sanitized request data
-  protected static $data = null;
+  static protected $data = null;
 
   // the request body
-  protected static $body = null;
+  static protected $body = null;
 
   /**
    * Returns the raw request data
    *
    * @return array
    */
-  public static function raw() {
+  static public function raw() {
     if(!is_null(static::$raw)) return static::$raw;
     return static::$raw = array_merge($_GET, $_POST);
   }
@@ -49,14 +49,14 @@ class R {
    * @param mixed $default A default value, which will be returned if nothing can be found for a given key
    * @param mixed
    */
-  public static function data($key = null, $default = null) {
+  static public function data($key = null, $default = null) {
 
     if(is_null(static::$data)) {
       static::$data = static::sanitize(static::raw());
 
       if(!static::is('GET')) {
         $body = static::body();
-        parse_str($body, $parsed);
+        @parse_str($body, $parsed);
 
         if(!is_array($parsed)) {
           $parsed = json_decode($body, false);
@@ -84,8 +84,8 @@ class R {
    *
    * @return array
    */
-  public static function getData($key = null, $default = null) {
-    return a::get((array)static::sanitize($_GET), $key, $default);
+  static public function getData($key = null, $default = null) {
+    return a::get(static::sanitize($_GET), $key, $default);
   }
 
   /**
@@ -93,8 +93,8 @@ class R {
    *
    * @return array
    */
-  public static function postData($key = null, $default = null) {
-    return a::get((array)static::sanitize($_POST), $key, $default);
+  static public function postData($key = null, $default = null) {
+    return a::get(static::sanitize($_POST), $key, $default);
   }
 
   /**
@@ -103,7 +103,7 @@ class R {
    * @param array $data
    * @return array
    */
-  protected static function sanitize($data) {
+  static protected function sanitize($data) {
 
     if(!is_array($data)) {
       return trim(str::stripslashes($data));
@@ -137,7 +137,7 @@ class R {
    * @param mixed $value The value
    * @return array
    */
-  public static function set($key, $value = null) {
+  static public function set($key, $value = null) {
 
     // set multiple values at once
     if(is_array($key)) {
@@ -174,7 +174,7 @@ class R {
    * @param mixed $default A default value, which will be returned if nothing can be found for a given key
    * @param mixed
    */
-  public static function get($key = null, $default = null) {
+  static public function get($key = null, $default = null) {
     return static::data($key, $default);
   }
 
@@ -183,7 +183,7 @@ class R {
    *
    * @param string $key
    */
-  public static function remove($key) {
+  static public function remove($key) {
     unset(static::$data[$key]);
   }
 
@@ -192,16 +192,16 @@ class R {
    *
    * @return string POST, GET, DELETE, PUT, HEAD, PATCH, etc.
    */
-  public static function method() {
+  static public function method() {
     return isset($_SERVER['REQUEST_METHOD']) ? strtoupper($_SERVER['REQUEST_METHOD']) : 'GET';
   }
 
   /**
    * Returns the request body from POST requests for example
    *
-   * @return mixed
+   * @return array
    */
-  public static function body() {
+  static public function body() {
     if(!is_null(static::$body)) return static::$body;
     return static::$body = file_get_contents('php://input');
   }
@@ -213,7 +213,7 @@ class R {
    * @param mixed $default A default value, which will be returned if nothing can be found for a given key
    * @return array
    */
-  public static function files($key = null, $default = null) {
+  static public function files($key = null, $default = null) {
     return a::get($_FILES, $key, $default);
   }
 
@@ -229,7 +229,7 @@ class R {
    *
    * @return boolean
    */
-  public static function is($method) {
+  static public function is($method) {
     if($method == 'ajax') {
       return static::ajax();
     } else {
@@ -242,7 +242,7 @@ class R {
    *
    * @return boolean
    */
-  public static function has($key) {
+  static public function has($key) {
     $data = static::data();
     return isset($data[$key]);
   }
@@ -260,7 +260,7 @@ class R {
    * @param string $default Pass an optional URL to use as default referer if no referer is being found
    * @return string
    */
-  public static function referer($default = null) {
+  static public function referer($default = null) {
     return a::get($_SERVER, 'HTTP_REFERER', $default);
   }
 
@@ -278,7 +278,7 @@ class R {
    * @param string $default Pass an optional URL to use as default referer if no referer is being found
    * @return string
    */
-  public static function referrer($default = null) {
+  static public function referrer($default = null) {
     return static::referer($default);
   }
 
@@ -288,7 +288,7 @@ class R {
    *
    * @param mixed
    */
-  public static function ip() {
+  static public function ip() {
     return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : false;
   }
 
@@ -297,8 +297,8 @@ class R {
    *
    * @return boolean
    */
-  public static function cli() {
-    return defined('STDIN') || (substr(PHP_SAPI, 0, 3) == 'cgi' && $term = getenv('TERM') && $term !== 'unknown');
+  static public function cli() {
+    return defined('STDIN') or (substr(PHP_SAPI, 0, 3) == 'cgi' and getenv('TERM'));
   }
 
   /**
@@ -312,8 +312,8 @@ class R {
    *
    * @return boolean
    */
-  public static function ajax() {
-    return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+  static public function ajax() {
+    return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) and strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
   }
 
   /**
@@ -321,7 +321,7 @@ class R {
    *
    * @return string
    */
-  public static function scheme() {
+  static public function scheme() {
     return url::scheme();
   }
 
@@ -330,7 +330,7 @@ class R {
    *
    * @return boolean
    */
-  public static function ssl() {
+  static public function ssl() {
     return static::scheme() == 'https';
   }
 
@@ -339,7 +339,7 @@ class R {
    *
    * @return boolean
    */
-  public static function secure() {
+  static public function secure() {
     return static::ssl();
   }
 

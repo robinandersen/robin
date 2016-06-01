@@ -19,7 +19,7 @@ class Yaml {
    * @param array $array
    * @return string
    */
-  public static function encode($array) {
+  static public function encode($array) {
     return preg_replace('!^---\n!', '', spyc::yamldump($array));
   }
 
@@ -30,7 +30,7 @@ class Yaml {
    * @param array $array
    * @return boolean
    */
-  public static function write($file, $array) {
+  static public function write($file, $array) {
     return f::write($file, static::encode($array));
   }
 
@@ -40,7 +40,7 @@ class Yaml {
    * @param string $yaml
    * @return array
    */
-  public static function decode($yaml) {
+  static public function decode($yaml) {
     return spyc::yamlload($yaml);
   }
 
@@ -50,7 +50,7 @@ class Yaml {
    * @param string $file
    * @return array
    */
-  public static function read($file) {
+  static public function read($file) {
     return spyc::yamlload($file);
   }
 

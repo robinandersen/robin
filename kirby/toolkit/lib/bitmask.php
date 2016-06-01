@@ -19,8 +19,8 @@ class Bitmask {
    * @param  mixed   $value The value to check for
    * @return boolean
    */
-  public static function validValue($value) {
-    return is_int($value) && ($value & ($value - 1)) == 0;
+  static public function validValue($value) {
+    return is_int($value) and ($value & ($value - 1)) == 0;
   }
 
   /**
@@ -30,7 +30,7 @@ class Bitmask {
    * @param  int     $bitmask The bitmask to check in
    * @return boolean
    */
-  public static function includes($value, $bitmask) {
+  static public function includes($value, $bitmask) {
     if(!static::validValue($value)) return false;
 
     return ($bitmask & $value) !== 0;
@@ -43,7 +43,7 @@ class Bitmask {
    * @param  int     $bitmask The bitmask to add the value to
    * @return int
    */
-  public static function add($value, $bitmask) {
+  static public function add($value, $bitmask) {
     if(!static::validValue($value)) {
       throw new Exception('The value "' . $value . '" is not appropriate for usage in bitmasks.');
     }
@@ -61,7 +61,7 @@ class Bitmask {
    * @param  int     $bitmask The bitmask to remove the value from
    * @return int
    */
-  public static function remove($value, $bitmask) {
+  static public function remove($value, $bitmask) {
     if(!static::validValue($value)) {
       throw new Exception('The value "' . $value . '" is not appropriate for usage in bitmasks.');
     }

@@ -29,8 +29,11 @@ class Media {
   // the content of the file
   protected $content = null;
 
-  // cache for various data
-  protected $cache = array();
+  // cache for the exif object
+  protected $exif = null;
+
+  // cache for the dimensions object
+  protected $dimensions = null;
 
   /**
    * Constructor
@@ -43,13 +46,6 @@ class Media {
     $this->filename  = basename($root);
     $this->name      = pathinfo($root, PATHINFO_FILENAME);
     $this->extension = strtolower(pathinfo($root, PATHINFO_EXTENSION));
-  }
-
-  /**
-   * Resets the internal cache
-   */
-  public function reset() {
-    $this->cache = array();
   }
 
   /**
@@ -285,6 +281,7 @@ class Media {
   /**
    * Returns the mime type of a file
    *
+   * @param string $file
    * @return string
    */
   public function mime() {
@@ -385,6 +382,8 @@ class Media {
 
   /**
    * Read and send the file with the correct headers
+   *
+   * @param string $file
    */
   public function show() {
     f::show($this->root);
@@ -406,8 +405,8 @@ class Media {
    * @return Exif
    */
   public function exif() {
-    if(isset($this->cache['exif'])) return $this->cache['exif'];
-    return $this->cache['exif'] = new Exif($this);
+    if(!is_null($this->exif)) return $this->exif;
+    return $this->exif = new Exif($this);
   }
 
   /**
@@ -432,17 +431,6 @@ class Media {
       $size   = (array)getimagesize($this->root);
       $width  = a::get($size, 0, 0);
       $height = a::get($size, 1, 0);
-    } else if($this->extension() == 'svg') {
-      $content = $this->read();
-      $xml     = simplexml_load_string($content);
-      $attr    = $xml->attributes();  
-      $width   = floatval($attr->width); 
-      $height  = floatval($attr->height);
-      if($width == 0 or $height == 0 and !empty($attr->viewBox)) {
-        $box    = str::split($attr->viewBox, ' ');
-        $width  = floatval(a::get($box, 2, 0));
-        $height = floatval(a::get($box, 3, 0));
-      }
     } else {
       $width  = 0;
       $height = 0;
@@ -517,6 +505,7 @@ class Media {
   }
 
   /**
+<<<<<<< HEAD
    * @param array $attr
    * @return string
    */
@@ -581,6 +570,8 @@ class Media {
   }
 
   /**
+=======
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
    * Converts the media object to a 
    * plain PHP array
    * 

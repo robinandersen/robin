@@ -1,20 +1,34 @@
-<div class="structure<?php e($field->readonly(), ' structure-readonly') ?>" 
-  data-field="structure" 
-  data-api="<?php __($field->url('sort')) ?>" 
-  data-sortable="<?php e($field->readonly(), 'false', 'true') ?>"
-  data-style="<?php echo $field->style() ?>">
+<div class="structure<?php e($field->readonly(), ' structure-readonly') ?>" data-field="structure" data-page="<?php echo $field->page() ?>" data-sortable="<?php e($field->readonly(), 'false', 'true') ?>">
 
   <?php echo $field->headline() ?>
 
-  <div class="structure-entries">
+  <input type="hidden" name="<?php __($field->name()) ?>" value="<?php __(json_encode($field->value()), false) ?>">
 
-    <?php if(!$field->entries()->count()): ?>
+  <script class="structure-entries-template" type="text/x-handlebars-template">
+
+    {{#unless entries}}
     <div class="structure-empty">
-      <?php _l('fields.structure.empty') ?> <a data-modal class="structure-add-button" href="<?php __($field->url('add')) ?>"><?php _l('fields.structure.add.first') ?></a>
+      <?php _l('fields.structure.empty') ?> <a class="structure-add-button" href="#"><?php _l('fields.structure.add.first') ?></a>
     </div>
-    <?php else: ?>
-    <?php require(__DIR__ . DS . 'styles' . DS . $field->style() . '.php') ?>
-    <?php endif ?>
-  </div>
+    {{/unless}}
+
+    {{#entries}}
+    <div class="structure-entry" id="structure-entry-{{_id}}">
+      <div class="structure-entry-content text">
+        <?php echo $field->entry() ?>
+      </div>
+      <?php if(!$field->readonly()): ?>
+      <nav class="structure-entry-options cf">
+        <button type="button" data-structure-id="{{_id}}" class="btn btn-with-icon structure-edit-button">
+          <?php i('pencil', 'left') . _l('fields.structure.edit') ?>
+        </button>
+        <button type="button" data-structure-id="{{_id}}" class="btn btn-with-icon structure-delete-button">
+          <?php i('trash-o', 'left') . _l('fields.structure.delete') ?>
+        </button>
+      </nav>
+      <?php endif ?>
+    </div>
+    {{/entries}}
+  </script>
 
 </div>

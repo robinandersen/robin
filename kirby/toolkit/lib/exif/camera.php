@@ -19,7 +19,8 @@ class Camera {
   /**
    * Constructor
    *
-   * @param array $exif
+   * @param string $make
+   * @param string $model
    */
   public function __construct($exif) {
     $this->make  = @$exif['Make'];

@@ -17,7 +17,7 @@ abstract class UserAbstract {
 
   public function __construct($username) {
 
-    $this->username = str::slug(basename($username));
+    $this->username = str::lower($username);
 
     // check if the account file exists
     if(!file_exists($this->file())) {
@@ -91,13 +91,8 @@ abstract class UserAbstract {
     return in_array($this->role()->id(), $roles);
   }
 
-  // support for old 'panel' role permission
   public function hasPanelAccess() {
-    return $this->role()->hasPermission('panel.access');
-  }
-
-  public function hasPermission($target) {
-    return $this->role()->hasPermission($target);
+    return $this->role()->hasPanelAccess();
   }
 
   public function isAdmin() {
@@ -148,32 +143,38 @@ abstract class UserAbstract {
 
     if(!password::match($password, $this->password)) return false;
 
-    // create a new session id
-    s::regenerateId();
-
     $key    = $this->generateKey();
     $secret = $this->generateSecret($key);
 
-    s::set('kirby_auth_secret', $secret);
-    s::set('kirby_auth_username', $this->username());
+    // http only cookie
+    cookie::set('kirby', $key, 0, '/', null, false, true);
 
-    cookie::set(
-      s::$name . '_auth', 
-      $key, 
-      s::$cookie['lifetime'], 
-      s::$cookie['path'], 
-      s::$cookie['domain'], 
-      s::$cookie['secure'], 
-      s::$cookie['httponly']
-    );
+    s::set('auth.created', time());
+    s::set('auth.updated', time());
+    s::set('auth.key', $key);
+    s::set('auth.secret', $secret);
+    s::set('auth.username', $this->username());
+    s::set('auth.ip', visitor::ip());
+    s::set('auth.ua', visitor::ua());
 
     return true;
 
   }
 
   static public function logout() {
-    s::destroy();    
-    cookie::remove(s::$name . '_auth');
+
+    session_regenerate_id();
+
+    s::remove('auth.created');
+    s::remove('auth.updated');
+    s::remove('auth.key');
+    s::remove('auth.secret');
+    s::remove('auth.username');
+    s::remove('auth.ip');
+    s::remove('auth.ua');
+    
+    cookie::remove('key');
+
   }
 
   public function is($user) {
@@ -255,9 +256,6 @@ abstract class UserAbstract {
     // all usernames must be lowercase
     $data['username'] = str::slug(a::get($data, 'username'));
 
-    // convert all keys to lowercase
-    $data = array_change_key_case($data, CASE_LOWER);
-
     // return the cleaned up data
     return $data;
 
@@ -310,33 +308,36 @@ abstract class UserAbstract {
 
   }
 
-  static public function unauthorize() {
-    s::remove('kirby_auth_secret');
-    s::remove('kirby_auth_username');
-    cookie::remove('kirby_auth');
-  }
-
   static public function current() {
 
-    $cookey   = cookie::get(s::$name . '_auth'); 
-    $username = s::get('kirby_auth_username'); 
+    $cookey   = cookie::get('kirby'); 
+    $username = s::get('auth.username'); 
 
-    if(empty($cookey)) {
-      static::unauthorize();
+    if(empty($cookey) or $cookey !== s::get('auth.key')) {
+      static::logout();
       return false;
     }
 
-    if(s::get('kirby_auth_secret') !== sha1($username . $cookey)) {
-      static::unauthorize();
+    if(s::get('auth.secret') !== sha1($username . $cookey)) {
+      static::logout();
+      return false;
+    }
+
+    if(s::get('auth.ua') !== visitor::ua()) {
+      static::logout();
+      return false;
+    }
+
+    // keep logged in for one week max.
+    if(s::get('auth.created') < time() - (60 * 60 * 24 * 7)) {
+      static::logout();
       return false;
     }
 
     // find the logged in user by token
-    try {
-      $user = new static($username);
+    if($user = site()->user($username)) {
       return $user;
-    } catch(Exception $e) {
-      static::unauthorize();
+    } else {
       return false;
     }
 

@@ -610,7 +610,56 @@ sql::registerMethod('createTable', function($sql, $table, $columns = array()) {
   
   return $query;
 
+<<<<<<< HEAD
 }, 'sqlite');
+=======
+  /**
+   * Creates a table with a simple scheme array for columns
+   *
+   * @todo  add more options per column
+   * @param string $table The table name
+   * @param array $columns
+   * @param string $type mysql or sqlite
+   * @return string
+   */
+  public function createTable($table, $columns = array()) {
+
+    $type   = strtolower($this->db->type());
+    $output = array();
+    $keys   = array();
+
+    if(!in_array($type, array('mysql', 'sqlite'))) throw new Exception('Unsupported database type: ' . $type);
+
+    foreach($columns as $name => $column) {
+
+      $template = array();
+
+      switch($column['type']) {
+        case 'id':
+          $template['mysql']  = '"{column.name}" INT(11) UNSIGNED NOT NULL AUTO_INCREMENT';
+          $template['sqlite'] = '"{column.name}" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE';
+          $keys[$name] = 'PRIMARY';
+          break;
+        case 'varchar':
+          $template['mysql']  = '"{column.name}" varchar(255) {column.null} {column.default}';
+          $template['sqlite'] = '"{column.name}" TEXT {column.null} {column.key} {column.default}';
+          break;
+        case 'text':
+          $template['mysql']  = '"{column.name}" TEXT';
+          $template['sqlite'] = '"{column.name}" TEXT {column.null} {column.key} {column.default}';
+          break;
+        case 'int':
+          $template['mysql']  = '"{column.name}" INT(11) UNSIGNED {column.null} {column.default}';
+          $template['sqlite'] = '"{column.name}" INTEGER {column.null} {column.key} {column.default}';
+          break;
+        case 'timestamp':
+          $template['mysql']  = '"{column.name}" INT(11) UNSIGNED {column.null} {column.default}';
+          $template['sqlite'] = '"{column.name}" INTEGER {column.null} {column.key} {column.default}';
+          break;
+        default:
+          throw new Exception('Unsupported column type: ' . $column['type']);
+      }
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
 
 /**
  * Splits a (qualified) identifier into table and column
@@ -640,6 +689,7 @@ sql::registerMethod('splitIdentifier', function($sql, $table, $identifier) {
 
 });
 
+<<<<<<< HEAD
 /**
  * Unquotes an identifier (table *or* column)
  * 
@@ -647,6 +697,14 @@ sql::registerMethod('splitIdentifier', function($sql, $table, $identifier) {
  * @return string
  */
 sql::registerMethod('unquoteIdentifier', function($sql, $identifier) {
+=======
+      $output[] = trim(str::template($template[$type], array(
+        'column.name'    => $name,
+        'column.null'    => r(a::get($column, 'null') === false, 'NOT NULL', 'NULL'),
+        'column.key'     => r($key and $key != 'INDEX', $key, false),
+        'column.default' => r(!is_null($defaultValue), 'DEFAULT ' . $defaultValue),
+      )));
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
 
   // remove quotes around the identifier
   if(in_array(str::substr($identifier, 0, 1), array('"', '`'))) $identifier = str::substr($identifier, 1);

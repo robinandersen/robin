@@ -19,7 +19,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function mbstring() { 
+  static public function mbstring() { 
     return function_exists('mb_split');
   }
 
@@ -29,7 +29,7 @@ class Detect {
    * @param mixed $min
    * @return boolean
    */
-  public static function php($min = '5.3') {
+  static public function php($min = '5.3') {
     return version_compare(PHP_VERSION, $min, '>=');
   }
 
@@ -38,7 +38,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function apache() {
+  static public function apache() {
     return apache_get_version() ? true : false;
   }
 
@@ -47,7 +47,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function windows() {
+  static public function windows() {
     return DS == '/' ? false : true;
   }
 
@@ -56,8 +56,8 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function iis() {
-    return isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'],'IIS') !== false ? true : false;  
+  static public function iis() {
+    return isset($_SERVER['SERVER_SOFTWARE']) and strpos($_SERVER['SERVER_SOFTWARE'],'IIS') !== false ? true : false;  
   }    
 
   /**
@@ -66,7 +66,7 @@ class Detect {
    * @param mixed $min
    * @return boolean
    */
-  public static function mysql($min = '5') {
+  static public function mysql($min = '5') {
     $extensions = get_loaded_extensions();
     if(!in_array('mysql', $extensions)) return false;      
     $version = preg_replace('#(^\D*)([0-9.]+).*$#', '\2', mysql_get_client_info());
@@ -78,7 +78,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function sqlite() {
+  static public function sqlite() {
     return in_array('sqlite3', get_loaded_extensions());                          
   }
 
@@ -87,7 +87,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function safemode() {
+  static public function safemode() {
     return ini_get('safe_mode');
   }
   
@@ -96,7 +96,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function gdlib() {
+  static public function gdlib() {
     return function_exists('gd_info');
   }
 
@@ -105,7 +105,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function imagick() {
+  static public function imagick() {
     return class_exists('Imagick');    
   }
 
@@ -114,7 +114,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function curl() {
+  static public function curl() {
     return in_array('curl', get_loaded_extensions());                          
   }  
 
@@ -123,7 +123,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function apc() {
+  static public function apc() {
     return function_exists('apc_add');
   }
 
@@ -132,7 +132,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function memcache() {
+  static public function memcache() {
     return class_exists('Memcache');
   }
 
@@ -141,7 +141,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function memcached() {
+  static public function memcached() {
     return class_exists('Memcached');
   }
 
@@ -150,7 +150,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function imap() {
+  static public function imap() {
     return function_exists('imap_body');
   }
 
@@ -159,7 +159,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function mcrypt() {
+  static public function mcrypt() {
     return function_exists('mcrypt_encrypt');
   }
 
@@ -168,7 +168,7 @@ class Detect {
    * 
    * @return boolean
    */
-  public static function exif() {
+  static public function exif() {
     return function_exists('read_exif_data');
   }
 
@@ -177,7 +177,7 @@ class Detect {
    * 
    * @return string
    */
-  public static function subfolder() {
+  static public function subfolder() {
     return trim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
   }
 
@@ -186,7 +186,7 @@ class Detect {
    * 
    * @return string
    */
-  public static function path() {
+  static public function path() {
     $uri    = explode('/', url::path());
     $script = explode('/', trim($_SERVER['SCRIPT_NAME'], '/\\'));    
     $parts  = array_diff_assoc($uri, $script);
@@ -199,21 +199,21 @@ class Detect {
    * 
    * @return string
    */
-  public static function documentRoot() {    
+  static public function documentRoot() {    
     $local    = $_SERVER['SCRIPT_NAME'];
     $absolute = $_SERVER['SCRIPT_FILENAME'];
     return substr($absolute, 0, strpos($absolute, $local));     
   }
 
   /**
-   * Converts any ini size value to an integer
-   * 
-   * @param string $key
+   * Returns the max accepted upload size
+   * defined in the php.ini
+   *
    * @return int
    */
-  public static function iniSize($key) {
+  static public function maxUploadSize() {
 
-    $size = ini_get($key);
+    $size = ini_get('post_max_size');
     $size = trim($size);
     $last = strtolower($size[strlen($size)-1]);
     switch($last) {
@@ -229,33 +229,13 @@ class Detect {
   }
 
   /**
-   * Returns the max accepted upload size
-   * defined in the php.ini
-   *
-   * @return int
-   */
-  public static function maxUploadSize() {
-    return static::iniSize('upload_max_filesize');
-  }
-
-  /**
-   * Returns the max accepted post size
-   * defined in the php.ini
-   *
-   * @return int
-   */
-  public static function maxPostSize() {    
-    return static::iniSize('post_max_size');
-  }
-
-  /**
    * Dirty browser sniffing for an ios device
    * 
    * @return boolean
    */
-  public static function ios() {
+  static public function ios() {
     $ua = visitor::ua();
-    return (str::contains($ua, 'iPod') || str::contains($ua, 'iPhone') || str::contains($ua, 'iPad'));
+    return (str::contains($ua, 'iPod') or str::contains($ua, 'iPhone') or str::contains($ua, 'iPad'));
   }
   
 }

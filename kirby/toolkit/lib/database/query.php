@@ -78,6 +78,12 @@ class Query {
   // Boolean to enable query debugging
   protected $debug = false;
 
+<<<<<<< HEAD
+=======
+  // an array with reserved sql values
+  static protected $literals = array('NOW()');
+
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
   /**
    * Constructor
    *
@@ -301,7 +307,109 @@ class Query {
    * @return object
    */
   public function where() {
+<<<<<<< HEAD
     $this->where = $this->filterQuery(func_get_args(), $this->where);
+=======
+
+    $args  = func_get_args();
+    $mode  = a::last($args);
+    $where = '';
+
+    // if there's a where clause mode attribute attached…
+    if(in_array($mode, array('AND', 'OR'))) {
+      // remove that from the list of arguments
+      array_pop($args);
+    } else {
+      $mode = 'AND';
+    }
+
+    switch(count($args)) {
+      case 1:
+
+        if(is_null($args[0])) {
+
+          return $this;
+
+        // ->where('username like "myuser"');
+        } else if(is_string($args[0])) {
+
+          // simply add the entire string to the where clause
+          $where = $args[0];
+
+        // ->where(array('username' => 'myuser'));
+        } else if(is_array($args[0])) {
+
+          $sql = new SQL($this->db);
+
+          // simple array mode (AND operator)
+          $where = $sql->values($args[0], ' AND ');
+
+        } else if(is_callable($args[0])) {
+
+          $query  = new static($this->db, $this->table);
+          $result = call_user_func($args[0], $query);
+          $where  = '(' . $query->where . ')';
+
+        }
+
+        break;
+      case 2:
+
+        // ->where('username like :username', array('username' => 'myuser'))
+        if(is_string($args[0]) && is_array($args[1])) {
+
+          // prepared where clause
+          $where = $args[0];
+
+          // store the bindings
+          $this->bindings($args[1]);
+
+        // ->where('username like ?', 'myuser')
+        } else if(is_string($args[0]) && is_string($args[1])) {
+
+          // prepared where clause
+          $where = $args[0];
+
+          // store the bindings
+          $this->bindings(array($args[1]));
+
+        }
+
+        break;
+      case 3:
+
+        // ->where('username', 'like', 'myuser');
+        if(is_string($args[0]) && is_string($args[1])) {
+
+          // ->where('username', 'in', array('myuser', 'myotheruser'));
+          if(is_array($args[2])) {
+
+            // build a list of escaped values
+            $values = array();
+            foreach($args[2] as $value) $values[] = '"' . $this->db->escape($value) . '"';
+
+            // add that to the where clause in parenthesis
+            $where = $args[0] . ' ' . trim($args[1]) . ' (' . implode(', ', $values) . ')';
+
+          // ->where('username', 'like', 'myuser');
+          } else {
+            $where = $args[0] . ' ' . trim($args[1]) . ' "' . $this->db->escape($args[2]) . '"';
+          }
+
+        }
+
+        break;
+
+    }
+
+    // attach the where clause
+    if(!empty($this->where)) {
+      $this->where = $this->where . ' ' . $mode . ' ' . $where;
+    } else {
+      $this->where = $where;
+    }
+
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
     return $this;
   }
 
@@ -445,6 +553,7 @@ class Query {
           'limit'    => $this->limit
         ));
 
+        break;
       case 'update':
 
         return $sql->update(array(
@@ -453,6 +562,7 @@ class Query {
           'values' => $this->values,
         ));
 
+        break;
       case 'insert':
 
         return $sql->insert(array(
@@ -460,6 +570,7 @@ class Query {
           'values' => $this->values,
         ));
 
+        break;
       case 'delete':
 
         return $sql->delete(array(
@@ -467,6 +578,7 @@ class Query {
           'where' => $this->where,
         ));
 
+        break;
     }
 
   }
@@ -531,6 +643,7 @@ class Query {
    */
   public function aggregate($method, $column = '*', $default = 0) {
 
+<<<<<<< HEAD
     // reset the sorting to avoid counting issues
     $this->order = null;
 
@@ -545,6 +658,8 @@ class Query {
       $column = $sql->combineIdentifier($table, $columnPart);
     }
 
+=======
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
     $fetch  = $this->fetch;
     $row    = $this->select($method . '(' . $column . ') as aggregation')->fetch('Obj')->first();
     $result = $row ? $row->get('aggregation') : $default;

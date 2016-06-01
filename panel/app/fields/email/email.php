@@ -1,6 +1,6 @@
 <?php
 
-class EmailField extends TextField {
+class EmailField extends InputField {
 
   public function __construct() {
 
@@ -20,7 +20,7 @@ class EmailField extends TextField {
       $input->attr('autocomplete', 'off');
       $input->data(array(
         'field' => 'autocomplete',
-        'url'   => panel()->urls()->api() . '/autocomplete/emails?_csrf=' . panel()->csrf()
+        'url'   => panel()->urls()->api() . '/autocomplete/emails'
       ));
     }
 

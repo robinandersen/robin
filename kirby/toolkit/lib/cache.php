@@ -18,7 +18,7 @@ class Cache {
   const ERROR_INVALID_DRIVER_INSTANCE = 1;
   const ERROR_UNKNOWN_METHOD = 2;
 
-  public static $driver = null;
+  static public $driver = null;
 
   /**
    * Setup simplifier for the current driver
@@ -27,7 +27,7 @@ class Cache {
    * @param mixed $args
    * @return Cache\Driver
    */
-  public static function setup($driver, $args = null) {
+  static public function setup($driver, $args = null) {
     $ref  = new ReflectionClass('Cache\\Driver\\' . $driver);
     return static::$driver = $ref->newInstanceArgs(array($args));
   }
@@ -39,7 +39,7 @@ class Cache {
    * @param mixed $args
    * @return mixed
    */
-  public static function __callStatic($method, $args) {
+  static public function __callStatic($method, $args) {
 
     if(is_null(static::$driver)) {
       throw new Error('Please define a cache driver', static::ERROR_INVALID_DRIVER);

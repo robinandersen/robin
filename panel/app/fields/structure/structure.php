@@ -11,61 +11,14 @@ class StructureField extends BaseField {
     )
   );
 
-  public $fields    = array();
-  public $entry     = null;
-  public $structure = null;
-  public $style     = 'items';
-  public $modalsize = 'medium';
-
-  public function routes() {
-
-    return array(
-      array(
-        'pattern' => 'add',
-        'method'  => 'get|post',
-        'action'  => 'add'
-      ),
-      array(
-        'pattern' => 'sort',
-        'method'  => 'post',
-        'action'  => 'sort',
-      ),
-      array(
-        'pattern' => '(:any)/update',
-        'method'  => 'get|post',
-        'action'  => 'update'
-      ),
-      array(
-        'pattern' => '(:any)/delete',
-        'method'  => 'get|post',
-        'action'  => 'delete',
-      )
-    );
-  }
-
-  public function modalsize() {
-    $sizes = array('small', 'medium', 'large');
-    return in_array($this->modalsize, $sizes) ? $this->modalsize : 'medium';
-  }
-
-  public function style() {
-    $styles = array('table', 'items');
-    return in_array($this->style, $styles) ? $this->style : 'items';
-  }
-
-  public function structure() {
-    if(!is_null($this->structure)) {
-      return $this->structure;
-    } else {
-      return $this->structure = $this->model->structure()->forField($this->name);      
-    }
-  }
+  public $fields = array();
+  public $entry  = null;
 
   public function fields() {
 
     $output = array();
 
-    foreach($this->structure->fields() as $k => $v) {
+    foreach($this->fields as $k => $v) {
       $v['name']  = $k;
       $v['value'] = '{{' . $k . '}}';
       $output[] = $v;
@@ -75,10 +28,17 @@ class StructureField extends BaseField {
 
   }
 
-  public function entries() {
-    return $this->structure()->data();
+  public function value() {
+
+    if(is_string($this->value)) {
+      $this->value = yaml::decode($this->value);
+    }
+
+    return $this->value;
+
   }
 
+<<<<<<< HEAD
   public function result() {  
     /**
      * Users store their data as plain yaml. 
@@ -91,31 +51,30 @@ class StructureField extends BaseField {
     } else {
       return $this->structure()->toYaml();            
     }
+=======
+  public function result() {
+    $result = parent::result();
+    $raw    = (array)json_decode($result);
+    $data   = array();
+    foreach($raw as $key => $row) {
+      unset($row->_id);
+      unset($row->_csfr);
+      $data[$key] = (array)$row;
+    }
+    return yaml::encode($data);
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
   }
 
-  public function entry($data) {
+  public function entry() {
 
     if(is_null($this->entry) or !is_string($this->entry)) {
       $html = array();
       foreach($this->fields as $name => $field) {
-        if(isset($data->$name)) {
-          $html[] = $data->$name;          
-        }
+        $html[] = '{{' . $name . '}}';
       }
       return implode('<br>', $html);
     } else {
-    
-      $text = $this->entry;
-
-      foreach((array)$data as $key => $value) {
-        if(is_array($value)) {
-          $value = implode(', ', array_values($value));
-        }
-        $text = str_replace('{{' . $key . '}}', $value, $text);
-      }
-
-      return $text;
-    
+      return $this->entry;
     }
 
   }
@@ -131,8 +90,7 @@ class StructureField extends BaseField {
       $add = new Brick('a');
       $add->html('<i class="icon icon-left fa fa-plus-circle"></i>' . l('fields.structure.add'));
       $add->addClass('structure-add-button label-option');
-      $add->data('modal', true);
-      $add->attr('href', purl($this->model, 'field/' . $this->name . '/structure/add'));
+      $add->attr('#');
 
     } else {
       $add = null;
@@ -154,9 +112,5 @@ class StructureField extends BaseField {
   public function content() {
     return tpl::load(__DIR__ . DS . 'template.php', array('field' => $this));
   }
-
-  public function url($action) {
-    return purl($this->model(), 'field/' . $this->name() . '/structure/' . $action);
-  }  
 
 }

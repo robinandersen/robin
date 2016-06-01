@@ -10,7 +10,7 @@
       </a>
     </li>
     <li>
-      <a href="<?php _u('options') ?>">
+      <a href="<?php _u('metatags') ?>">
         <?php i('gear', 'left') . _l('metatags') ?>
       </a>
     </li>
@@ -20,7 +20,7 @@
       </a>
     </li>
     <li>
-      <a href="<?php echo panel()->urls()->logout() ?>" target="_self">
+      <a href="<?php echo panel()->urls()->logout() ?>">
         <?php i('power-off', 'left') . _l('logout') ?>
       </a>
     </li>

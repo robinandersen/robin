@@ -33,9 +33,18 @@ class Mock extends Driver {
   }
 
   /**
-   * Retrieve an item from the cache.
+   * Get an item from the cache.
+   *
+   * <code>
+   *    // Get an item from the cache driver
+   *    $value = Cache::get('value');
+   *
+   *    // Return a default value if the requested item isn't cached
+   *    $value = Cache::get('value', 'default value');
+   * </code>
    *
    * @param  string  $key
+   * @param  mixed   $default
    * @return mixed
    */
   public function retrieve($key) {

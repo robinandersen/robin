@@ -1,9 +1,10 @@
 <?php
 
-class TextareaField extends TextField {
+class TextareaField extends InputField {
 
   static public $assets = array(
     'js' => array(
+      'autosize.min.js',
       'editor.js'
     )
   );
@@ -13,21 +14,6 @@ class TextareaField extends TextField {
     $this->buttons = true;
     $this->min     = 0;
     $this->max     = false;
-  }
-
-  public function routes() {
-    return array(
-      array(
-        'pattern' => 'link',
-        'action'  => 'link',
-        'method'  => 'get|post'
-      ),
-      array(
-        'pattern' => 'email',
-        'action'  => 'email',
-        'method'  => 'get|post'
-      ),
-    );
   }
 
   public function input() {
@@ -75,7 +61,7 @@ class TextareaField extends TextField {
 
   public function buttons() {
     require_once(__DIR__ . DS . 'buttons.php');
-    return new Buttons($this, $this->buttons);
+    return new Buttons($this->buttons);
   }
 
   public function validate() {

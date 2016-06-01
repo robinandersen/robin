@@ -239,6 +239,7 @@ abstract class PagesAbstract extends Collection {
 
   }
 
+<<<<<<< HEAD
   /**
    * Returns files from all pages
    *
@@ -301,6 +302,8 @@ abstract class PagesAbstract extends Collection {
 
   }
 
+=======
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
   /**
    * Converts the pages collection
    * into a plain array

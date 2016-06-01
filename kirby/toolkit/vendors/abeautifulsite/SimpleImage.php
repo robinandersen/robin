@@ -26,7 +26,7 @@ class SimpleImage {
      */
     public $quality = 80;
 
-    protected $image, $filename, $original_info, $width, $height, $imagestring, $exif;
+    protected $image, $filename, $original_info, $width, $height, $imagestring;
 
     /**
      * Create instance and load an image, or create an image from scratch
@@ -38,22 +38,24 @@ class SimpleImage {
      *                                  Where red, green, blue - integers 0-255, alpha - integer 0-127<br>
      *                                  (is used for creating image from scratch)
      *
+     * @return SimpleImage
      * @throws Exception
      *
      */
-    public function __construct($filename = null, $width = null, $height = null, $color = null) {
-        if ($filename !== null) {
+    function __construct($filename = null, $width = null, $height = null, $color = null) {
+        if ($filename) {
             $this->load($filename);
-        } elseif ($width !== null) {
+        } elseif ($width) {
             $this->create($width, $height, $color);
         }
+        return $this;
     }
 
     /**
      * Destroy image resource
      *
      */
-    public function __destruct() {
+    function __destruct() {
         if( get_resource_type($this->image) === 'gd' ) {
             imagedestroy($this->image);
         }
@@ -72,7 +74,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function adaptive_resize($width, $height = null) {
+    function adaptive_resize($width, $height = null) {
 
         return $this->thumbnail($width, $height);
 
@@ -84,7 +86,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function auto_orient() {
+    function auto_orient() {
 		
 	// stop if there's no exif data
 	if(!isset($this->original_info['exif']['Orientation'])) {
@@ -142,7 +144,7 @@ class SimpleImage {
      * @return  SimpleImage
      *
      */
-    public function best_fit($max_width, $max_height) {
+    function best_fit($max_width, $max_height) {
 
         // If it already fits, there's nothing to do
         if ($this->width <= $max_width && $this->height <= $max_height) {
@@ -180,7 +182,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function blur($type = 'selective', $passes = 1) {
+    function blur($type = 'selective', $passes = 1) {
         switch (strtolower($type)) {
             case 'gaussian':
                 $type = IMG_FILTER_GAUSSIAN_BLUR;
@@ -203,7 +205,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function brightness($level) {
+    function brightness($level) {
         imagefilter($this->image, IMG_FILTER_BRIGHTNESS, $this->keep_within($level, -255, 255));
         return $this;
     }
@@ -217,7 +219,7 @@ class SimpleImage {
      *
      *
      */
-    public function contrast($level) {
+    function contrast($level) {
         imagefilter($this->image, IMG_FILTER_CONTRAST, $this->keep_within($level, -100, 100));
         return $this;
     }
@@ -232,7 +234,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function colorize($color, $opacity) {
+    function colorize($color, $opacity) {
         $rgba = $this->normalize_color($color);
         $alpha = $this->keep_within(127 - (127 * $opacity), 0, 127);
         imagefilter($this->image, IMG_FILTER_COLORIZE, $this->keep_within($rgba['r'], 0, 255), $this->keep_within($rgba['g'], 0, 255), $this->keep_within($rgba['b'], 0, 255), $alpha);
@@ -250,7 +252,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function create($width, $height = null, $color = null) {
+    function create($width, $height = null, $color = null) {
 
         $height = $height ?: $width;
         $this->width = $width;
@@ -265,7 +267,7 @@ class SimpleImage {
             'mime' => 'image/png'
         );
 
-        if ($color !== null) {
+        if ($color) {
             $this->fill($color);
         }
 
@@ -284,7 +286,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function crop($x1, $y1, $x2, $y2) {
+    function crop($x1, $y1, $x2, $y2) {
 
         // Determine crop size
         if ($x2 < $x1) {
@@ -319,7 +321,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function desaturate($percentage = 100) {
+    function desaturate($percentage = 100) {
 
         // Determine percentage
         $percentage = $this->keep_within($percentage, 0, 100);
@@ -349,7 +351,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function edges() {
+    function edges() {
         imagefilter($this->image, IMG_FILTER_EDGEDETECT);
         return $this;
     }
@@ -360,7 +362,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function emboss() {
+    function emboss() {
         imagefilter($this->image, IMG_FILTER_EMBOSS);
         return $this;
     }
@@ -374,7 +376,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function fill($color = '#000000') {
+    function fill($color = '#000000') {
 
         $rgba = $this->normalize_color($color);
         $fill_color = imagecolorallocatealpha($this->image, $rgba['r'], $rgba['g'], $rgba['b'], $rgba['a']);
@@ -394,7 +396,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function fit_to_height($height) {
+    function fit_to_height($height) {
 
         $aspect_ratio = $this->height / $this->width;
         $width = $height / $aspect_ratio;
@@ -411,7 +413,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function fit_to_width($width) {
+    function fit_to_width($width) {
 
         $aspect_ratio = $this->height / $this->width;
         $height = $width * $aspect_ratio;
@@ -428,7 +430,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function flip($direction) {
+    function flip($direction) {
 
         $new = imagecreatetruecolor($this->width, $this->height);
         imagealphablending($new, false);
@@ -459,7 +461,7 @@ class SimpleImage {
      * @return int
      *
      */
-    public function get_height() {
+    function get_height() {
         return $this->height;
     }
 
@@ -469,7 +471,7 @@ class SimpleImage {
      * @return string   portrait|landscape|square
      *
      */
-    public function get_orientation() {
+    function get_orientation() {
 
         if (imagesx($this->image) > imagesy($this->image)) {
             return 'landscape';
@@ -496,7 +498,7 @@ class SimpleImage {
      * )</pre>
      *
      */
-    public function get_original_info() {
+    function get_original_info() {
         return $this->original_info;
     }
 
@@ -506,7 +508,7 @@ class SimpleImage {
      * @return int
      *
      */
-    public function get_width() {
+    function get_width() {
         return $this->width;
     }
 
@@ -516,7 +518,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function invert() {
+    function invert() {
         imagefilter($this->image, IMG_FILTER_NEGATE);
         return $this;
     }
@@ -530,7 +532,7 @@ class SimpleImage {
      * @throws Exception
      *
      */
-    public function load($filename) {
+    function load($filename) {
 
         // Require GD library
         if (!extension_loaded('gd')) {
@@ -543,12 +545,12 @@ class SimpleImage {
     /**
      * Load a base64 string as image
      *
-     * @param string        $base64string   base64 string
+     * @param string        $filename   base64 string
      *
      * @return SimpleImage
      *
      */
-    public function load_base64($base64string) {
+    function load_base64($base64string) {
         if (!extension_loaded('gd')) {
             throw new Exception('Required extension GD is not loaded.');
         }
@@ -564,7 +566,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function mean_remove() {
+    function mean_remove() {
         imagefilter($this->image, IMG_FILTER_MEAN_REMOVAL);
         return $this;
     }
@@ -577,7 +579,7 @@ class SimpleImage {
      * @throws Exception
      *
      */
-    public function opacity($opacity) {
+    function opacity($opacity) {
 
         // Determine opacity
         $opacity = $this->keep_within($opacity, 0, 1) * 100;
@@ -608,7 +610,7 @@ class SimpleImage {
      * @throws Exception
      *
      */
-    public function output($format = null, $quality = null) {
+    function output($format = null, $quality = null) {
 
         // Determine quality
         $quality = $quality ?: $this->quality;
@@ -647,6 +649,7 @@ class SimpleImage {
                 break;
             default:
                 throw new Exception('Unsupported image format: '.$this->filename);
+                break;
         }
     }
 
@@ -660,7 +663,7 @@ class SimpleImage {
      * @throws Exception
      *
      */
-    public function output_base64($format = null, $quality = null) {
+    function output_base64($format = null, $quality = null) {
 
         // Determine quality
         $quality = $quality ?: $this->quality;
@@ -699,6 +702,7 @@ class SimpleImage {
                 break;
             default:
                 throw new Exception('Unsupported image format: '.$this->filename);
+                break;
         }
         $image_data = ob_get_contents();
         ob_end_clean();
@@ -722,7 +726,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function overlay($overlay, $position = 'center', $opacity = 1, $x_offset = 0, $y_offset = 0) {
+    function overlay($overlay, $position = 'center', $opacity = 1, $x_offset = 0, $y_offset = 0) {
 
         // Load overlay image
         if( !($overlay instanceof SimpleImage) ) {
@@ -788,7 +792,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function pixelate($block_size = 10) {
+    function pixelate($block_size = 10) {
         imagefilter($this->image, IMG_FILTER_PIXELATE, $block_size, true);
         return $this;
     }
@@ -802,7 +806,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function resize($width, $height) {
+    function resize($width, $height) {
 
         // Generate new GD image
         $new = imagecreatetruecolor($width, $height);
@@ -845,7 +849,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function rotate($angle, $bg_color = '#000000') {
+    function rotate($angle, $bg_color = '#000000') {
 
         // Perform the rotation
         $rgba = $this->normalize_color($bg_color);
@@ -876,12 +880,12 @@ class SimpleImage {
      * @throws Exception
      *
      */
-    public function save($filename = null, $quality = null, $format = null) {
+    function save($filename = null, $quality = null, $format = null) {
 
         // Determine quality, filename, and format
         $quality = $quality ?: $this->quality;
         $filename = $filename ?: $this->filename;
-        if( $format === null ) {
+        if( !$format ) {
             $format = $this->file_ext($filename) ?: $this->original_info['format'];
         }
 
@@ -916,7 +920,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function sepia() {
+    function sepia() {
         imagefilter($this->image, IMG_FILTER_GRAYSCALE);
         imagefilter($this->image, IMG_FILTER_COLORIZE, 100, 50, 0);
         return $this;
@@ -928,7 +932,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function sketch() {
+    function sketch() {
         imagefilter($this->image, IMG_FILTER_MEAN_REMOVAL);
         return $this;
     }
@@ -941,7 +945,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function smooth($level) {
+    function smooth($level) {
         imagefilter($this->image, IMG_FILTER_SMOOTH, $this->keep_within($level, -10, 10));
         return $this;
     }
@@ -961,7 +965,7 @@ class SimpleImage {
      * @throws Exception
      *
      */
-    public function text($text, $font_file, $font_size = 12, $color = '#000000', $position = 'center', $x_offset = 0, $y_offset = 0) {
+    function text($text, $font_file, $font_size = 12, $color = '#000000', $position = 'center', $x_offset = 0, $y_offset = 0) {
 
         // todo - this method could be improved to support the text angle
         $angle = 0;
@@ -972,7 +976,7 @@ class SimpleImage {
 
         // Determine textbox size
         $box = imagettfbbox($font_size, $angle, $font_file, $text);
-        if (empty($box)) {
+        if (!$box) {
             throw new Exception('Unable to load font: '.$font_file);
         }
         $box_width = abs($box[6] - $box[2]);
@@ -1040,7 +1044,7 @@ class SimpleImage {
      * @return SimpleImage
      *
      */
-    public function thumbnail($width, $height = null) {
+    function thumbnail($width, $height = null) {
 
         // Determine height
         $height = $height ?: $width;
@@ -1084,6 +1088,8 @@ class SimpleImage {
     /**
      * Get meta data of image or base64 string
      *
+     * @param string|null       $imagestring    If omitted treat as a normal image
+     *
      * @return SimpleImage
      * @throws Exception
      *
@@ -1105,6 +1111,7 @@ class SimpleImage {
                     break;
                 default:
                     throw new Exception('Invalid image: '.$this->filename);
+                    break;
             }
         } elseif (function_exists('getimagesizefromstring')) {
             $info = getimagesizefromstring($this->imagestring);

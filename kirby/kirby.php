@@ -9,7 +9,11 @@ use Kirby\Urls;
 
 class Kirby {
 
+<<<<<<< HEAD
   static public $version = '2.3.0';
+=======
+  static public $version = '2.1.0';
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
   static public $instance;
   static public $hooks = array();
   static public $triggered = array();
@@ -53,6 +57,7 @@ class Kirby {
   public function defaults() {
 
     $defaults = array(
+<<<<<<< HEAD
       'url'                             => false,
       'timezone'                        => 'UTC',
       'license'                         => null,
@@ -90,6 +95,123 @@ class Kirby {
     );
 
     return $defaults;
+=======
+      'url'                           => false,
+      'timezone'                      => 'UTC',
+      'license'                       => null,
+      'rewrite'                       => true,
+      'error'                         => 'error',
+      'home'                          => 'home',
+      'locale'                        => 'en_US.UTF8',
+      'routes'                        => array(),
+      'headers'                       => array(),
+      'languages'                     => array(),
+      'roles'                         => array(),
+      'cache'                         => false,
+      'debug'                         => 'env',
+      'ssl'                           => false,
+      'cache.driver'                  => 'file',
+      'cache.options'                 => array(),
+      'cache.ignore'                  => array(),
+      'cache.autoupdate'              => true,
+      'date.handler'                  => 'date',
+      'tinyurl.enabled'               => true,
+      'tinyurl.folder'                => 'x',
+      'markdown'                      => true,
+      'markdown.extra'                => false,
+      'markdown.breaks'               => true,
+      'smartypants'                   => false,
+      'smartypants.attr'              => 1,
+      'smartypants.doublequote.open'  => '&#8220;',
+      'smartypants.doublequote.close' => '&#8221;',
+      'smartypants.space.emdash'      => ' ',
+      'smartypants.space.endash'      => ' ',
+      'smartypants.space.colon'       => '&#160;',
+      'smartypants.space.semicolon'   => '&#160;',
+      'smartypants.space.marks'       => '&#160;',
+      'smartypants.space.frenchquote' => '&#160;',
+      'smartypants.space.thousand'    => '&#160;',
+      'smartypants.space.unit'        => '&#160;',
+      'smartypants.skip'              => 'pre|code|kbd|script|style|math',
+      'kirbytext.video.class'         => 'video',
+      'kirbytext.video.width'         => false,
+      'kirbytext.video.height'        => false,
+      'kirbytext.image.figure'        => true,
+      'content.file.extension'        => 'txt',
+      'content.file.ignore'           => array(),
+      'thumbs.driver'                 => 'gd',
+      'thumbs.filename'               => '{safeName}-{hash}.{extension}',
+      'thumbs.destination'            => false,
+    );
+
+    // default markdown parser callback
+    $defaults['markdown.parser'] = function($text) {
+
+      // initialize the right markdown class
+      $parsedown = kirby::instance()->option('markdown.extra') ? new ParsedownExtra() : new Parsedown();
+
+      // set markdown auto-breaks
+      $parsedown->setBreaksEnabled(kirby::instance()->option('markdown.breaks'));
+
+      // parse it!
+      return $parsedown->text($text);
+
+    };
+
+    // default smartypants parser callback
+    $defaults['smartypants.parser'] = function($text) {
+      $parser = new SmartyPantsTypographer_Parser(kirby::instance()->option('smartypants.attr', 1));
+      return $parser->transform($text);
+    };
+
+    // css handler
+    $defaults['css.handler'] = function($url, $media = null) {
+
+      $kirby = kirby::instance();
+
+      if(is_array($url)) {
+        $css = array();
+        foreach($url as $u) $css[] = call($kirby->option('css.handler'), $u);
+        return implode(PHP_EOL, $css) . PHP_EOL;
+      }
+
+      // auto template css files
+      if($url == '@auto') {
+
+        $file = $kirby->site()->page()->template() . '.css';
+        $root = $kirby->roots()->autocss() . DS . $file;
+        $url  = $kirby->urls()->autocss() . '/' . $file;
+
+        if(!file_exists($root)) return false;
+
+      }
+
+      return html::tag('link', null, array(
+        'rel'   => 'stylesheet',
+        'href'  => url($url),
+        'media' => $media
+      ));
+
+    };
+
+    // js handler
+    $defaults['js.handler'] = function($src, $async = false) {
+
+      $kirby = kirby::instance();
+
+      if(is_array($src)) {
+        $js = array();
+        foreach($src as $s) $js[] = call($kirby->option('js.handler'), $s);
+        return implode(PHP_EOL, $js) . PHP_EOL;
+      }
+
+      // auto template css files
+      if($src == '@auto') {
+
+        $file = $kirby->site()->page()->template() . '.js';
+        $root = $kirby->roots()->autojs() . DS . $file;
+        $src  = $kirby->urls()->autojs() . '/' . $file;
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
 
   }
 
@@ -197,6 +319,7 @@ class Kirby {
 
     });
 
+<<<<<<< HEAD
     // setup the pagination redirect to the error page
     pagination::$defaults['redirect'] = $this->option('error');
 
@@ -208,6 +331,14 @@ class Kirby {
     email::$defaults['subject'] = $this->option('email.subject');
     email::$defaults['body']    = $this->option('email.body');
     email::$defaults['options'] = $this->option('email.options');
+=======
+    // setup the thumbnail generator
+    thumb::$defaults['root']        = $this->roots->thumbs();
+    thumb::$defaults['url']         = $this->urls->thumbs();
+    thumb::$defaults['driver']      = $this->option('thumbs.driver');
+    thumb::$defaults['filename']    = $this->option('thumbs.filename');
+    thumb::$defaults['destination'] = $this->option('thumbs.destination');
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
 
     // simple error handling
     if($this->options['debug'] === true) {
@@ -264,10 +395,7 @@ class Kirby {
             if(s::get('language') and $language = $kirby->site()->sessionLanguage()) {
               // $language is already set but the user wants to 
               // select the default language
-              $referer = r::referer();
-              if(!empty($referer) && str::startsWith($referer, $this->urls()->index())) {
-                $language = $kirby->site()->defaultLanguage();
-              } 
+              $language = $kirby->site()->defaultLanguage();
             } else {
               // detect the user language
               $language = $kirby->site()->detectedLanguage();
@@ -460,25 +588,19 @@ class Kirby {
 
   public function localize() {
 
-    $site = $this->site();
-
-    if($site->multilang() and !$site->language()) {
-      $site->language = $site->languages()->findDefault();
-    }    
-
     // set the local for the specific language
-    if(is_array($site->locale())) {
-      foreach($site->locale() as $key => $value) {
+    if(is_array($this->site()->locale())) {
+      foreach($this->site()->locale() as $key => $value) {
         setlocale($key, $value);        
       }
     } else {
-      setlocale(LC_ALL, $site->locale());
+      setlocale(LC_ALL, $this->site()->locale());
     }
 
     // additional language variables for multilang sites
-    if($site->multilang()) {
+    if($this->site()->multilang()) {
       // path for the language file
-      $file = $this->roots()->languages() . DS . $site->language()->code() . '.php';
+      $file = $this->roots()->languages() . DS . $this->site()->language()->code() . '.php';
       // load the file if it exists
       if(file_exists($file)) include_once($file);
     }
@@ -616,7 +738,21 @@ class Kirby {
    * @return string
    */
   public function template(Page $page, $data = array()) {
+<<<<<<< HEAD
     return $this->component('template')->render($page, $data);
+=======
+
+    // apply the basic template vars
+    tpl::$data = array_merge(tpl::$data, array(
+      'kirby' => $this,
+      'site'  => $this->site(),
+      'pages' => $this->site()->children(),
+      'page'  => $page
+    ), $page->templateData(), $data, $this->controller($page, $data));
+
+    return tpl::load($page->templateFile());
+
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
   }
 
   public function request() {
@@ -698,7 +834,7 @@ class Kirby {
    * Register a new hook
    * 
    * @param string $hook The name of the hook
-   * @param closure $callback
+   * @param clojure $callback
    */
   public function hook($hook, $callback) {
 
@@ -718,6 +854,7 @@ class Kirby {
    * @return mixed
    */
   public function trigger($hook, $args = null) {
+<<<<<<< HEAD
 
     if(isset(static::$hooks[$hook]) and is_array(static::$hooks[$hook])) {
       foreach(static::$hooks[$hook] as $key => $callback) {
@@ -726,6 +863,10 @@ class Kirby {
 
         static::$triggered[$hook] = $key;
 
+=======
+    if(isset(static::$hooks[$hook]) and is_array(static::$hooks[$hook])) {
+      foreach(static::$hooks[$hook] as $callback) {
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
         try {
           call($callback, $args);        
         } catch(Exception $e) {

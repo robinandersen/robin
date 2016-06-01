@@ -18,30 +18,13 @@ for more information: http://getkirby.com/license
 c::set('license', 'K2-PERSONAL-c0cf577a408470ebfd3eb96d6a566b21');
 
 /*
+
 ---------------------------------------
 Kirby Configuration
 ---------------------------------------
+
+By default you don't have to configure anything to
+make Kirby work. For more fine-grained configuration
+of the system, please check out http://getkirby.com/docs/advanced/options
+
 */
-
-//Removeing the "home" from the url when viewing projects
-c::set('routes', array(
-  array(
-    'pattern' => '(:any)',
-    'action'  => function($uid) {
-
-      $page = page($uid);
-
-      if(!$page) $page = page('home/' . $uid);
-      if(!$page) $page = site()->errorPage();
-
-      return site()->visit($page);
-
-    }
-  ),
-  array(
-    'pattern' => 'home/(:any)',
-    'action'  => function($uid) {
-      go($uid);
-    }
-  )
-));

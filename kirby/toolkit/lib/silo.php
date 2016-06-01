@@ -15,9 +15,9 @@
  */
 class Silo {
 
-  public static $data = array();
+  static public $data = array();
 
-  public static function set($key, $value = null) {
+  static public function set($key, $value = null) {
     if(is_array($key)) {
       return static::$data = array_merge(static::$data, $key);
     } else {
@@ -25,12 +25,12 @@ class Silo {
     }
   }
 
-  public static function get($key = null, $default = null) {
+  static public function get($key = null, $default = null) {
     if(empty($key)) return static::$data;
     return isset(static::$data[$key]) ? static::$data[$key] : $default;
   }
 
-  public static function remove($key = null) {
+  static public function remove($key = null) {
     // reset the entire array
     if(is_null($key)) return static::$data = array();
     // unset a single key

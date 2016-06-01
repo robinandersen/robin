@@ -260,7 +260,7 @@ class Page extends PageAbstract {
       throw new Exception('The page could not be updated');
     }
 
-    $this->kirby->cache()->flush();
+    cache::flush();
     $this->reset();
     $this->touch();
     return true;

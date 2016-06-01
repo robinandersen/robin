@@ -4,28 +4,26 @@
 
   <?php echo $meta ?>
 
-  <title><?php __($title) ?></title>
+  <title><?php __(site()->title()) ?> | Panel</title>
 
-  <?php echo $css ?>
-  <?php echo $formcss ?>
-  <?php echo $pluginscss ?>
+  <?php echo assets::css() ?>
 
+  <style><?php echo form::css() ?></style>
+
+  <!-- custom panel stylesheet -->
   <?php if($stylesheet = kirby()->option('panel.stylesheet')): ?>
   <?php echo css($stylesheet) ?>
   <?php endif ?>
 
-  <?php echo $js ?>
-  <?php echo $appjs ?>
-  <?php echo $formjs ?>
-  <?php echo $pluginsjs ?>
-
 </head>
-<body class="app <?php __($direction) ?>" data-csrf="<?php __($csrf) ?>">
+<body class="app <?php echo panel()->direction() ?>" data-kirby-version="<?php echo kirby()->version() ?>" data-panel-version="<?php echo panel()->version() ?>">
 
-  <div class="main">
-    <?php if(isset($topbar))  echo $topbar ?>
-    <?php if(isset($content)) echo $content ?>
-  </div>
+  <div data-view="modal" class="modal"></div>
+  <div data-view="main"  class="main"><i class="loader"></i></div>
+
+  <?php echo assets::js() ?>
+  <?php echo js(panel()->urls()->js() . '/apps/main.js?v=' . panel()->version()) ?>
+  <script><?php echo form::js(false) ?></script>
 
 </body>
 </html>

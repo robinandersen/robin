@@ -1,15 +1,17 @@
 <?php
 
-class TitleField extends TextField {
+class TitleField extends InputField {
 
   public function __construct() {
 
+    $this->type     = 'text';
     $this->label    = l::get('fields.title.label', 'Title');
     $this->icon     = 'font';
     $this->required = true;
 
   }
 
+<<<<<<< HEAD
   public function help() {
 
     if($this->page and !$this->page->isSite()) {
@@ -37,4 +39,6 @@ class TitleField extends TextField {
 
   }
 
+=======
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
 }

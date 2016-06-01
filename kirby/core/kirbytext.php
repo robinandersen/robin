@@ -47,11 +47,23 @@ abstract class KirbytextAbstract {
     // tagsify
     $text = preg_replace_callback('!(?=[^\]])\([a-z0-9_-]+:.*?\)!is', array($this, 'tag'), $text);
 
+<<<<<<< HEAD
     // markdownify
     $text = kirby::instance()->component('markdown')->parse($text);
 
     // smartypantsify
     $text = kirby::instance()->component('smartypants')->parse($text);
+=======
+    // smartypantsify
+    if(kirby()->option('smartypants')) {
+      $text = call(kirby::instance()->option('smartypants.parser'), $text);
+    }
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
+
+    // markdownify
+    if(kirby()->option('markdown')) {
+      $text = call(kirby::instance()->option('markdown.parser'), $text);
+    }
 
     // post filters
     foreach(static::$post as $filter) {

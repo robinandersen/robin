@@ -14,9 +14,9 @@ class Thumb extends Obj {
   const ERROR_INVALID_IMAGE  = 0;
   const ERROR_INVALID_DRIVER = 1;
 
-  public static $drivers = array();
+  static public $drivers = array();
 
-  public static $defaults = array(
+  static public $defaults = array(
     'destination' => false,
     'filename'    => '{safeName}-{hash}.{extension}',
     'url'         => '/thumbs',
@@ -64,7 +64,7 @@ class Thumb extends Obj {
       dir::make(dirname($this->destination->root));
 
       // check for a valid image
-      if(!$this->source->exists() || $this->source->type() != 'image') {
+      if(!$this->source->exists() or $this->source->type() != 'image') {
         throw new Error('The given image is invalid', static::ERROR_INVALID_IMAGE);
       }
 
@@ -97,15 +97,14 @@ class Thumb extends Obj {
       return call($this->options['destination'], $this);
     } else {
 
-      $destination = new Obj();      
-      $safeName    = f::safeName($this->source->name());
+      $destination = new Obj();
 
       $destination->filename = str::template($this->options['filename'], array(
         'extension'    => $this->source->extension(),
         'name'         => $this->source->name(),
         'filename'     => $this->source->filename(),
-        'safeName'     => $safeName,
-        'safeFilename' => $safeName . '.' . $this->extension(),
+        'safeName'     => f::safeName($this->source->name()),
+        'safeFilename' => f::safeName($this->source->name()) . '.' . $this->extension(),
         'width'        => $this->options['width'],
         'height'       => $this->options['height'],
         'hash'         => md5($this->source->root() . $this->settingsIdentifier()),
@@ -189,7 +188,7 @@ class Thumb extends Obj {
 
     // if the thumb already exists and the source hasn't been updated
     // we don't need to generate a new thumbnail
-    if(file_exists($this->destination->root) && f::modified($this->destination->root) >= $this->source->modified()) return true;
+    if(file_exists($this->destination->root) and f::modified($this->destination->root) >= $this->source->modified()) return true;
 
     return false;
 
@@ -206,10 +205,10 @@ class Thumb extends Obj {
     if($this->options['overwrite'] === true) return false;
 
     // try to use the original if resizing is not necessary
-    if($this->options['width']   >= $this->source->width()  &&
-       $this->options['height']  >= $this->source->height() &&
-       $this->options['crop']    == false                   &&
-       $this->options['blur']    == false                   &&
+    if($this->options['width']   >= $this->source->width()  and
+       $this->options['height']  >= $this->source->height() and
+       $this->options['crop']    == false                   and
+       $this->options['blur']    == false                   and
        $this->options['upscale'] == false) return true;
 
     return false;
@@ -280,6 +279,7 @@ thumb::$drivers['im'] = function($thumb) {
   $command[] = '"' . $thumb->source->root() . '"';
   $command[] = '-strip';
 
+<<<<<<< HEAD
   if($thumb->options['interlace']) {
     $command[] = '-interlace line';
   }
@@ -288,6 +288,8 @@ thumb::$drivers['im'] = function($thumb) {
     $command[] = '-coalesce';
   }
 
+=======
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
   if($thumb->options['grayscale']) {
     $command[] = '-colorspace gray';
   }

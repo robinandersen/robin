@@ -25,9 +25,7 @@ class BaseField {
   public $default;
   public $error = false;
   public $parentField = false;
-  public $page;
-  public $model;
-  
+
   public function root() {
     $obj = new ReflectionClass($this);
     return dirname($obj->getFileName());
@@ -41,14 +39,12 @@ class BaseField {
         return true;
       } else if(is_array($this->validate)) {
         foreach($this->validate as $validator => $options) {
-          if(!is_null($options)) {
-             if(is_numeric($validator)) {
-              $result = call('v::' . $options, $this->value());
-            } else {
-              $result = call('v::' . $validator, array($this->value(), $options));
-            }
-            if(!$result) return false;
+          if(is_numeric($validator)) {
+            $result = call('v::' . $options, $this->value());
+          } else {
+            $result = call('v::' . $validator, array($this->value(), $options));
           }
+          if(!$result) return false;
         }
         return true;
       } else {
@@ -91,14 +87,28 @@ class BaseField {
   }
 
   public function i18n($value) {
+<<<<<<< HEAD
     return i18n($value);
+=======
+
+    if(empty($value)) {
+      return null;
+    } else if(is_array($value)) {
+      return a::get($value, panel()->language(), $this->name());
+    } else if($translation = l::get($value)) {
+      return $translation;
+    } else {
+      return $value;
+    }
+
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
   }
 
   public function icon() {
 
     if(empty($this->icon)) {
       return null;
-    } else if($this->readonly() and empty($this->icon)) {
+    } else if($this->readonly()) {
       $this->icon = 'lock';
     }
 
@@ -181,11 +191,15 @@ class BaseField {
   }
 
   public function __toString() {
+<<<<<<< HEAD
     try {
       return (string)$this->template();
     } catch(Exception $e) {
       return (string)$e->getMessage();
     }
+=======
+    return (string)$this->template();
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
   }
 
 }

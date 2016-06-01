@@ -123,19 +123,9 @@ abstract class ContentAbstract {
       return $this->data[$key];
     } else {
       // return an empty field as default
-      return new Field($this->page, $key);
+      return $this->data[$key] = new Field($this->page, $key);
     }
 
-  }
-
-  /**
-   * Checks if a field exists
-   * 
-   * @param string $key
-   * @return boolean
-   */
-  public function has($key) {
-    return isset($this->data[strtolower($key)]);
   }
 
   public function __call($method, $arguments = null) {

@@ -2,6 +2,12 @@
 
 class TagsField extends TextField {
 
+  static public $assets = array(
+    'js' => array(
+      'tags.js'
+    )
+  );
+
   public function __construct() {
 
     $this->icon      = 'tag';
@@ -38,7 +44,6 @@ class TagsField extends TextField {
         'yaml'      => $this->parentField,
         'model'     => $model,
         'separator' => $this->separator(),
-        '_csrf'     => panel()->csrf(),
       );
 
       $input->data('url', panel()->urls()->api() . '/autocomplete/field?' . http_build_query($query));

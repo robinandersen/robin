@@ -1,16 +1,20 @@
+<<<<<<< HEAD
 <?php if($languages && $languages->count() > 1): ?>
+=======
+<?php if($languages = site()->languages()): ?>
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development
 
 <div class="languages">
 
   <a id="languages-toggle" class="languages-toggle" data-dropdown="true" href="#languages">
-    <span><?php __($language->code()) ?></span>
+    <span><?php __(site()->language()->code()) ?></span>
   </a>
 
   <nav id="languages" class="dropdown dropdown-left">
     <ul class="nav nav-list dropdown-list">
       <?php foreach($languages as $lang): ?>
       <li>
-        <a href="?language=<?php echo $lang->code() ?>"><?php __(strtoupper($lang->code())) ?></a>
+        <a data-keep="false" data-lang="<?php __($lang->code()) ?>" href="#"><?php __(strtoupper($lang->code())) ?></a>
       </li>
       <?php endforeach ?>
     </ul>

@@ -2,6 +2,7 @@
 
 if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 
+<<<<<<< HEAD
 load(array(
 
   // main class
@@ -69,3 +70,9 @@ class_alias('Kirby\\Panel', 'Panel');
 
 include(__DIR__ . DS . 'helpers.php');
 
+=======
+include(__DIR__ . DS . 'panel.php');
+include(__DIR__ . DS . 'panel' . DS . 'roots.php');
+include(__DIR__ . DS . 'panel' . DS . 'urls.php');
+include(__DIR__ . DS . 'helpers.php');
+>>>>>>> parent of 8fd0d20... Merge pull request #1 from robinandersen/Development

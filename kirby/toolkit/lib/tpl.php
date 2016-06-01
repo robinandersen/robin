@@ -13,17 +13,17 @@
  */
 class Tpl extends Silo {
 
-  public static $data = array();
+  static public $data = array();
 
-  public static function load($_file, $_data = array(), $_return = true) {
-    if(!file_exists($_file)) return false;
+  static public function load($file, $data = array(), $return = true) {
+    if(!file_exists($file)) return false;
     ob_start();
-    extract(array_merge(static::$data, (array)$_data));
-    require($_file);
-    $_content = ob_get_contents();
+    extract(array_merge(static::$data, (array)$data));
+    require($file);
+    $content = ob_get_contents();
     ob_end_clean();
-    if($_return) return $_content;
-    echo $_content;
+    if($return) return $content;
+    echo $content;
   }
 
 }

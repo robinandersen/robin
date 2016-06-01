@@ -71,8 +71,7 @@ class Session extends Driver {
    * @return boolean
    */
   public function flush() {
-    $_SESSION['_cache'] = array();
-    return true;
+    return $_SESSION['_cache'] = array();
   }
 
 }

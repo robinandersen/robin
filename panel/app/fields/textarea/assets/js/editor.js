@@ -4,23 +4,18 @@
 
     return this.each(function() {
 
-      if($(this).data('editor')) {
-        return $(this);
-      }
-
-      var textarea = $(this);
+      var textarea = $(this).autosize();
       var buttons  = textarea.parent().find('.field-buttons');
 
-      // start autosizing
-      textarea.autosize();
-
-      buttons.find('.btn').on('click.editorButton', function(e) {
+      buttons.find('.btn').on('click', function(e) {
 
         textarea.focus();
         var button = $(this);
 
         if(button.data('action')) {
-          app.modal.open(button.data('action'), window.location.href);
+
+          EditorController[button.data('action')](textarea, button);
+
         } else {
 
           var sel  = textarea.getSelection();
@@ -40,22 +35,18 @@
 
       });
 
-      buttons.find('[data-editor-shortcut]').each(function(i, el) {
-        var key    = $(this).data('editor-shortcut');
-        var action = function(e) {
-          $(el).trigger('click');
-          return false;
-        };
-
-        textarea.bind('keydown', key, action);
-
-        if(key.match(/meta\+/)) {
-          textarea.bind('keydown', key.replace('meta+', 'ctrl+'), action);
-        }
-
+      textarea.bind('keydown', 'meta+return', function() {
+        textarea.parents('.form').trigger('submit');
       });
 
-      textarea.data('editor', true);
+      buttons.find('[data-editor-shortcut]').each(function(i, el) {
+        var key = $(this).data('editor-shortcut');
+        textarea.bind('keydown', key, function(e) {
+          $(el).trigger('click');
+          return false;
+        });
+
+      });
 
     });
 
