@@ -1,12 +1,12 @@
 <?php
 
 /**
- * 
+ *
  * Session
- * 
+ *
  * Handles all session fiddling
- * 
- * @package   Kirby Toolkit 
+ *
+ * @package   Kirby Toolkit
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      http://getkirby.com
  * @copyright Bastian Allgeier
@@ -23,13 +23,13 @@ class S {
    * Starts a new session
    *
    * <code>
-   * 
+   *
    * s::start();
    * // do whatever you want with the session now
-   * 
+   *
    * </code>
-   * 
-   */  
+   *
+   */
   public static function start() {
 
     if(session_status() === PHP_SESSION_ACTIVE) return true;
@@ -40,11 +40,11 @@ class S {
       'path'     => ini_get('session.cookie_path'),
       'domain'   => ini_get('session.cookie_domain'),
       'secure'   => r::secure(),
-      'httponly' => true      
+      'httponly' => true
     );
 
     // set the custom session name
-    session_name(static::$name); 
+    session_name(static::$name);
 
     // make sure to use cookies only
     ini_set('session.use_cookies', 1);
@@ -54,25 +54,25 @@ class S {
     if(!session_start()) return false;
 
     if(!setcookie(
-      static::$name, 
-      session_id(), 
-      cookie::lifetime(static::$cookie['lifetime']), 
-      static::$cookie['path'], 
-      static::$cookie['domain'], 
-      static::$cookie['secure'], 
+      static::$name,
+      session_id(),
+      cookie::lifetime(static::$cookie['lifetime']),
+      static::$cookie['path'],
+      static::$cookie['domain'],
+      static::$cookie['secure'],
       static::$cookie['httponly']
     )) {
       return false;
     }
 
     // mark it as started
-    static::$started = true;      
+    static::$started = true;
 
     // check if the session is still valid
     if(!static::check()) {
       return static::destroy();
     }
-      
+
     return true;
 
   }
@@ -80,23 +80,23 @@ class S {
   /**
    * Checks if the session is still valid
    * and not expired
-   * 
+   *
    * @return boolean
    */
   public static function check() {
 
     // check for the last activity and compare it with the session timeout
     if(isset($_SESSION['kirby_session_activity']) && time() - $_SESSION['kirby_session_activity'] > static::$timeout * 60) {
-      return false;      
+      return false;
     }
 
     // check for an existing fingerprint and compare it
     if(isset($_SESSION['kirby_session_fingerprint']) and $_SESSION['kirby_session_fingerprint'] !== static::fingerprint()) {
       return false;
-    } 
-    
+    }
+
     // store a new fingerprint and the last activity
-    $_SESSION['kirby_session_fingerprint'] = static::fingerprint();      
+    $_SESSION['kirby_session_fingerprint'] = static::fingerprint();
     $_SESSION['kirby_session_activity']    = time();
 
     return true;
@@ -105,12 +105,12 @@ class S {
 
   /**
    * Generates a fingerprint from the user agent string
-   * 
+   *
    * @return string
    */
   public static function fingerprint() {
     if(!r::cli()) {
-      return sha1(Visitor::ua() . (ip2long($_SERVER['REMOTE_ADDR']) & ip2long('255.255.0.0')));      
+      return sha1($_SERVER['HTTP_USER_AGENT']);      
     } else {
       return '';
     }
@@ -118,34 +118,34 @@ class S {
 
   /**
    * Returns the current session id
-   * 
+   *
    * @return string
-   */  
+   */
   public static function id() {
     static::start();
     return session_id();
   }
 
-  /** 
+  /**
    * Sets a session value by key
    *
    * <code>
-   * 
+   *
    * s::set('username', 'bastian');
    * // saves the username in the session
-   *     
+   *
    * s::set(array(
    *     'key1' => 'val1',
    *     'key2' => 'val2',
    *     'key3' => 'val3'
    * ));
    * // setting multiple variables at once
-   * 
-   * </code>   
-   * 
+   *
+   * </code>
+   *
    * @param  mixed   $key The key to define
    * @param  mixed   $value The value for the passed key
-   */    
+   */
   public static function set($key, $value = false) {
 
     static::start();
@@ -161,21 +161,21 @@ class S {
 
   /**
    * Gets a session value by key
-   * 
+   *
    * <code>
-   * 
+   *
    * s::get('username', 'bastian');
    * // saves the username in the session
-   * 
+   *
    * echo s::get('username');
    * // output: 'bastian'
-   * 
-   * </code>   
    *
-   * @param  mixed    $key The key to look for. Pass false or null to return the entire session array. 
+   * </code>
+   *
+   * @param  mixed    $key The key to look for. Pass false or null to return the entire session array.
    * @param  mixed    $default Optional default value, which should be returned if no element has been found
    * @return mixed
-   */  
+   */
   public static function get($key = false, $default = null) {
 
     static::start(static::$name, static::$timeout, static::$cookie);
@@ -188,37 +188,37 @@ class S {
 
   /**
    * Retrieves an item and removes it afterwards
-   * 
+   *
    * @param string $key
    * @param mixed $default
    * @return mixed
    */
   public static function pull($key, $default = null) {
-    $value = s::get($key, $default); 
+    $value = s::get($key, $default);
     s::remove($key);
     return $value;
   }
 
   /**
    * Removes a value from the session by key
-   * 
+   *
    * <code>
-   * 
+   *
    * $_SESSION = array(
    *     'username' => 'bastian',
    *     'id' => 1,
    * );
-   * 
+   *
    * s::remove('username');
    * // $_SESSION = array(
    * //    'id' => 1
    * // )
-   * 
-   * </code>      
+   *
+   * </code>
    *
    * @param  mixed    $key The key to remove by
    * @return array    The session array without the value
-   */  
+   */
   public static function remove($key) {
 
     static::start();
@@ -230,7 +230,7 @@ class S {
 
   /**
    * Checks if the session has already been started
-   * 
+   *
    * @return boolean
    */
   public static function started() {
@@ -239,18 +239,18 @@ class S {
 
   /**
    * Destroys a session
-   * 
+   *
    * <code>
-   * 
+   *
    * s::start();
    * // do whatever you want with the session now
-   * 
+   *
    * s::destroy();
    * // everything stored in the session will be deleted
-   * 
+   *
    * </code>
    *
-   */  
+   */
   public static function destroy() {
 
     if(!static::$started) return false;
@@ -274,7 +274,7 @@ class S {
 
   /**
    * Destroys a session first and then starts it again
-   */  
+   */
   public static function restart() {
     static::destroy();
     static::start();
@@ -285,7 +285,7 @@ class S {
    */
   public static function regenerateId() {
     static::start(static::$name, static::$timeout, static::$cookie);
-    session_regenerate_id(true);      
+    session_regenerate_id(true);
   }
 
 }
