@@ -108,13 +108,9 @@ class S {
    *
    * @return string
    */
-  public static function fingerprint() {
-    if(!r::cli()) {
-      return sha1($_SERVER['HTTP_USER_AGENT']);      
-    } else {
-      return '';
-    }
-  }
+   public static function fingerprint() {
+     return '';
+   }
 
   /**
    * Returns the current session id
